@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     element: <div>facebook</div>,
   },
   {
-    path: '/auth/facebook',
-    element: <div>facebook</div>,
+    path: '/auth/google',
+    element: <div>google</div>,
   },
 ])
