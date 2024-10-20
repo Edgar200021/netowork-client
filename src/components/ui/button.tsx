@@ -5,12 +5,14 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 const buttonVariants = cva(
-  'flex items-center transition-colors duration-300 ease-in',
+  'flex items-center justify-center transition-colors duration-300 ease-in',
   {
     variants: {
       variant: {
         primary:
-          'bg-primary-200 active:bg-primary-300 hover:bg-primary-100 disabled:text-text-secondary disabled:border-[1px] disabled:border-[#ebebeb] text-white',
+          'bg-primary-200 active:bg-primary-300 hover:bg-primary-100 disabled:text-text-secondary disabled:border-[1px] disabled:border-[#ebebeb] disabled:bg-[#f6f6f6] text-white',
+		secondary: 'bg-white text-text-primary border-border-primary border-[1px] disabled:border-[#ebebeb] disabled:text-text-secondary active:bg-[#ebebeb]',
+		clear: "" 
       },
       size: {
         sm: 'text-sm leading-[143%] rounded-lg py-[6px] px-3',

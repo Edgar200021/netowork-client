@@ -25,7 +25,6 @@ const config: Config = {
       error: '#ed0a34',
       success: '#0dc268',
       notify: '#ff9e00',
-      warning: '#fffce0',
       rating: '#ffd400',
       link: {
         primary: '#005bd1',
@@ -48,6 +47,7 @@ const config: Config = {
       },
       black: '#000000',
       white: '#ffffff',
+      transparent: 'rgba(0, 0, 0, 0)',
     },
 
     extend: {
