@@ -28,7 +28,7 @@ export const useHandleError = <T extends string[]>(error?: unknown) => {
   }, [error])
 
   const handleError = useCallback((error: unknown) => {
-    if (error) return
+    if (!error) return
     const err = isRtkError(error) ? error.data : error
 
     if (isApiValidationError(err)) {

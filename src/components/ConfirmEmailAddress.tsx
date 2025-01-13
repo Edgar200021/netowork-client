@@ -2,6 +2,7 @@ import { useHandleApiResponse } from '@/hooks/useHandleApiResponse'
 import { useHandleError } from '@/hooks/useHandleError'
 import { cn } from '@/lib/utils'
 import { useSendVerificationEmailMutation } from '@/store/auth/authApi'
+import { SetNewEmail } from './SetNewEmail'
 import { Button } from './ui/button'
 
 interface Props {
@@ -42,17 +43,16 @@ export const ConfirmEmailAddress = ({ className, email }: Props) => {
         Пройдите по ссылке и активируйте вашу электронную почту
       </p>
       <div className="flex flex-col gap-y-5">
-        <Button
+        <Button 
           onClick={onClick}
           disabled={isLoading}
           variant="link"
           className="underline p-0 text-wrap"
+          type="button"
         >
           Отправить новое письмо для подтверждения почты
         </Button>
-        <Button disabled={isLoading} variant="link" className="p-0">
-          Указать другую почту
-        </Button>
+        <SetNewEmail oldEmail={email} />
       </div>
     </div>
   )

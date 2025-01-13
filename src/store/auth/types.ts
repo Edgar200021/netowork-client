@@ -25,3 +25,9 @@ export type SendVerificationEmailRequest = {
   email: string
 }
 export type SendVerificationEmailResponse = ApiSuccessResponse<string>
+
+export type SetNewEmailAddressRequest = {
+	oldEmail: string 
+	newEmail: string
+}
+export type SetNewEmailAddressResponse = ApiSuccessResponse<string>

@@ -7,6 +7,8 @@ import {
   RegisterResponse,
   SendVerificationEmailRequest,
   SendVerificationEmailResponse,
+  SetNewEmailAddressRequest,
+  SetNewEmailAddressResponse,
   VerifyAccountRequest,
   VerifyAccountResponse,
 } from './types'
@@ -60,6 +62,16 @@ export const authApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    setNewEmailAddress: builder.mutation<
+      SetNewEmailAddressResponse,
+      SetNewEmailAddressRequest
+    >({
+      query: body => ({
+        url: '/auth/set-new-email-address',
+        method: 'PATCH',
+        body,
+      }),
+    }),
   }),
 })
 
@@ -68,4 +80,5 @@ export const {
   useLoginMutation,
   useVerifyAccountMutation,
   useSendVerificationEmailMutation,
+  useSetNewEmailAddressMutation
 } = authApi

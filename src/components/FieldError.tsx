@@ -7,15 +7,15 @@ interface Props {
 
 export const FieldErrors = ({ className, error }: Props) => {
   return (
-    <div className={cn('flex flex-col gap-y-1', className)}>
+    <div className={cn('flex flex-col gap-y-1 items-start', className)}>
       {Array.isArray(error) ? (
         error.map((error, index) => (
           <span key={index} className="text-sm text-red-500">
-            {error}
+            *{error}
           </span>
         ))
       ) : (
-        <span className="text-sm text-red-500">{error}</span>
+        <span className="text-sm text-red-500">*{error}</span>
       )}
     </div>
   )

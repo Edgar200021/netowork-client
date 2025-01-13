@@ -8,8 +8,6 @@ interface Props {
 export const ConfirmEmailAddressPage = ({ className }: Props) => {
   const { params } = useQueryParams('email')
 
-  console.log(params)
-
   if (!params.email?.trim()) return null
 
   return (
