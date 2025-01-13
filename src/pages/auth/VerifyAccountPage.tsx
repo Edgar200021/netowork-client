@@ -1,6 +1,6 @@
 import { useQueryParams } from '@/hooks/useQueryParams'
 import { cn } from '@/lib/utils'
-import { VerifyAccount } from './VerifyAccount'
+import { VerifyAccount } from '../../components/VerifyAccount'
 
 interface Props {
   className?: string

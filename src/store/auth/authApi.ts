@@ -1,6 +1,8 @@
 import { baseApi } from '../baseApi'
 import { authSlice } from './authSlice'
 import {
+  ForgotPasswordRequest,
+  ForgotPasswordResponse,
   LoginRequest,
   LoginResponse,
   RegisterRequest,
@@ -72,6 +74,16 @@ export const authApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    forgotPassword: builder.mutation<
+      ForgotPasswordResponse,
+      ForgotPasswordRequest
+    >({
+      query: body => ({
+        url: '/auth/forgot-password',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
@@ -80,5 +92,6 @@ export const {
   useLoginMutation,
   useVerifyAccountMutation,
   useSendVerificationEmailMutation,
-  useSetNewEmailAddressMutation
+  useSetNewEmailAddressMutation,
+  useForgotPasswordMutation
 } = authApi

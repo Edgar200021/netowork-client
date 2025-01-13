@@ -74,7 +74,7 @@ export const SetNewEmail = memo(({ className, oldEmail }: Props) => {
       className={cn('flex flex-col gap-y-5', className)}
     >
       <div className="flex flex-col gap-y-1">
-        <Input {...register('newEmail')} placeholder="Email" />
+        <Input type="email" {...register('newEmail')} placeholder="Email" />
         {(errors.oldEmail?.message ||
           errors.newEmail?.message ||
           apiValidationErrors?.newEmail ||

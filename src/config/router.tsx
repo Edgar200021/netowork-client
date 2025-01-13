@@ -1,5 +1,6 @@
 import { ROUTES } from '@/constants/routes'
 import { AppLayout } from '@/layouts/AppLayout'
+import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { RegisterPage } from '@/pages/auth/RegisterPage'
 import { VerifyAccountPage } from '@/pages/auth/VerifyAccountPage'
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.verifyAccount,
         element: <VerifyAccountPage />,
+      },
+      {
+        path: ROUTES.forgotPassword,
+        element: <ForgotPasswordPage />,
       },
     ],
   },

@@ -6,9 +6,9 @@ import { useHandleError } from '@/hooks/useHandleError'
 import { cn } from '@/lib/utils'
 import { useVerifyAccountMutation } from '@/store/auth/authApi'
 import { UserRole } from '@/types/user'
-import { Link } from 'react-router'
-import sprites from '../../assets/icons/sprites.svg'
 import { useEffect } from 'react'
+import { Link } from 'react-router'
+import sprites from '../assets/icons/sprites.svg'
 
 interface Props {
   className?: string
@@ -48,7 +48,6 @@ export const VerifyAccount = ({ className, token }: Props) => {
           {data.data.role === UserRole.Freelancer
             ? 'Найти задание'
             : 'Создать задание'}
-          о
         </Link>
       </Button>
     </div>
