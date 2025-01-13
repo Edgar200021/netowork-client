@@ -51,7 +51,9 @@ export const ForgotPasswordForm = ({ className }: Props) => {
         <h1 className="text-primary-foreground font-semibold text-[25px] leading-[130%] capitalize text-center mb-8 ">
           Восстановление пароля
         </h1>
-        <p className='text-center leading-[140%] mb-8'>Введите email, который вы использовали при регистрации</p>
+        <p className="text-center leading-[140%] mb-8">
+          Введите email, который вы использовали при регистрации
+        </p>
 
         <div className="flex flex-col gap-y-5 mb-3">
           <label className="flex flex-col gap-y-2">

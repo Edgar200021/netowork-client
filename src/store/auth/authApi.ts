@@ -7,6 +7,8 @@ import {
   LoginResponse,
   RegisterRequest,
   RegisterResponse,
+  ResetPasswordRequest,
+  ResetPasswordResponse,
   SendVerificationEmailRequest,
   SendVerificationEmailResponse,
   SetNewEmailAddressRequest,
@@ -84,6 +86,16 @@ export const authApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    resetPassword: builder.mutation<
+      ResetPasswordResponse,
+      ResetPasswordRequest
+    >({
+      query: body => ({
+        url: '/auth/reset-password',
+        method: 'PATCH',
+        body,
+      }),
+    }),
   }),
 })
 
@@ -93,5 +105,6 @@ export const {
   useVerifyAccountMutation,
   useSendVerificationEmailMutation,
   useSetNewEmailAddressMutation,
-  useForgotPasswordMutation
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = authApi

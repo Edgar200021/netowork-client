@@ -3,6 +3,7 @@ import { AppLayout } from '@/layouts/AppLayout'
 import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { RegisterPage } from '@/pages/auth/RegisterPage'
+import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage'
 import { VerifyAccountPage } from '@/pages/auth/VerifyAccountPage'
 import { createBrowserRouter } from 'react-router'
 import { ConfirmEmailAddressPage } from '../pages/auth/ConfirmEmailAddressPage'
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.forgotPassword,
         element: <ForgotPasswordPage />,
+      },
+      {
+        path: ROUTES.resetPassword,
+        element: <ResetPasswordPage />,
       },
     ],
   },
