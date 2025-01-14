@@ -22,4 +22,8 @@ export const authSlice = createSlice({
       state.user = action.payload
     },
   },
+  selectors: {
+    getIsAuthorized: state => state.isAuthorized,
+    getUser: state => state.user,
+  },
 })

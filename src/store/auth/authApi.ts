@@ -5,6 +5,8 @@ import {
   ForgotPasswordResponse,
   LoginRequest,
   LoginResponse,
+  LogoutRequest,
+  LogoutResponse,
   RegisterRequest,
   RegisterResponse,
   ResetPasswordRequest,
@@ -35,8 +37,6 @@ export const authApi = baseApi.injectEndpoints({
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         const { data } = await queryFulfilled
-
-        console.log(data)
 
         dispatch(authSlice.actions.setUser(data.data))
       },
@@ -96,6 +96,21 @@ export const authApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    logout: builder.mutation<LogoutResponse, LogoutRequest>({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'POST',
+        body: {},
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        await queryFulfilled
+
+        setTimeout(() => {
+          dispatch(authSlice.actions.setUser(undefined))
+          dispatch(authSlice.actions.setIsAuthorized(false))
+        }, 200)
+      },
+    }),
   }),
 })
 
@@ -107,4 +122,5 @@ export const {
   useSetNewEmailAddressMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useLogoutMutation,
 } = authApi

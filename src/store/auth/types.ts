@@ -42,3 +42,6 @@ export type ResetPasswordRequest = {
   password: string
 }
 export type ResetPasswordResponse = ApiSuccessResponse<string>
+
+export type LogoutRequest = null
+export type LogoutResponse = ApiSuccessResponse<string>

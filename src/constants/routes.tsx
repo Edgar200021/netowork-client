@@ -6,4 +6,5 @@ export const ROUTES = {
   resetPassword: '/auth/reset-password',
   confirmEmailAddress: '/auth/confirm-email-address',
   verifyAccount: '/auth/verify',
+  profile: '/profile',
 } as const

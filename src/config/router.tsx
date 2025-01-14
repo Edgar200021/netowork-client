@@ -5,6 +5,7 @@ import { LoginPage } from '@/pages/auth/LoginPage'
 import { RegisterPage } from '@/pages/auth/RegisterPage'
 import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage'
 import { VerifyAccountPage } from '@/pages/auth/VerifyAccountPage'
+import { ProtectedPage } from '@/pages/ProtectedPage'
 import { createBrowserRouter } from 'react-router'
 import { ConfirmEmailAddressPage } from '../pages/auth/ConfirmEmailAddressPage'
 
@@ -12,6 +13,10 @@ export const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
+      {
+        path: ROUTES.main,
+        element: <h1>MAIN PAGE</h1>,
+      },
       {
         path: ROUTES.register,
         element: <RegisterPage />,
@@ -35,6 +40,15 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.resetPassword,
         element: <ResetPasswordPage />,
+      },
+      {
+        element: <ProtectedPage />,
+        children: [
+          {
+            path: ROUTES.profile,
+            element: <h1>Profile</h1>,
+          },
+        ],
       },
     ],
   },
