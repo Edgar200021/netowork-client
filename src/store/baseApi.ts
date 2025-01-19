@@ -42,9 +42,9 @@ export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: customBaseQuery,
   endpoints: builder => ({
-    healthCheck: builder.query<null, null>({
+    healthCheck: builder.query<string, null>({
       query: () => ({
-        url: '/health-check',
+        url: '/health',
       }),
     }),
   }),

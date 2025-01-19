@@ -23,7 +23,6 @@ export const SetNewEmail = memo(({ className, oldEmail }: Props) => {
   const [setNewEmail, { isLoading, error, data }] =
     useSetNewEmailAddressMutation()
 
-  console.log(oldEmail)
   const {
     register,
     handleSubmit,
@@ -49,7 +48,6 @@ export const SetNewEmail = memo(({ className, oldEmail }: Props) => {
   })
 
   const onSubmit = (data: SetNewEmailSchema) => {
-    console.log('SUBMIT', data.oldEmail)
     setNewEmail({
       oldEmail: data.oldEmail,
       newEmail: data.newEmail,

@@ -15,7 +15,10 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setIsAuthorized: (state, action) => {
+    setIsAuthorized: (state, action: PayloadAction<boolean>) => {
+      if (action.payload === false) {
+        state.user = undefined
+      }
       state.isAuthorized = action.payload
     },
     setUser: (state, action: PayloadAction<User | undefined>) => {

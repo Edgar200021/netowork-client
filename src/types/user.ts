@@ -4,6 +4,8 @@ export type User = {
   lastName: string
   email: string
   avatar?: string
+  isVerified: boolean
+  createdAt: string
   role: UserRole
 }
 

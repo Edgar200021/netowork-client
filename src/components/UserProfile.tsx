@@ -7,6 +7,7 @@ import {
 import { ROUTES } from '@/constants/routes'
 import { cn } from '@/lib/utils'
 import { User } from '@/types/user'
+import { useState } from 'react'
 import { Link } from 'react-router'
 import defaultProfileIcon from '../assets/icons/default-profile.svg'
 import { Logout } from './Logout'
@@ -17,9 +18,13 @@ interface Props {
 }
 
 export const UserProfile = ({ className, user }: Props) => {
+  const [open, setOpen] = useState(false)
+
+  const closePopover = () => setOpen(false)
+
   return (
     <div className={cn('', className)}>
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger>
           <Avatar>
             <AvatarImage src={user.avatar || defaultProfileIcon} />
@@ -28,6 +33,7 @@ export const UserProfile = ({ className, user }: Props) => {
         </PopoverTrigger>
         <PopoverContent align="start" alignOffset={-250} className="p-1.5">
           <Button
+            onClick={closePopover}
             asChild
             variant="ghost"
             className="hover:no-underline rounded-xl py-2 px-3 w-full justify-start"

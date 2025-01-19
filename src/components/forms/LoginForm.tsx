@@ -7,7 +7,7 @@ import { useHandleError } from '@/hooks/useHandleError'
 import { loginSchema, LoginSchema } from '@/schemas/loginSchema'
 import { useLoginMutation } from '@/store/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { FieldErrors } from '../FieldError'
 import { PasswordInput } from '../PasswordInput'
 import { Button } from '../ui/button'
@@ -27,9 +27,13 @@ export const LoginForm = ({ className }: Props) => {
   })
   const [login, { isLoading, data, error }] = useLoginMutation()
   const { apiValidationErrors } = useHandleError<(keyof LoginSchema)[]>(error)
+  const navigate = useNavigate()
 
   useHandleApiResponse(data, {
     toastText: 'Авторизация прошла успешно',
+    callback: () => {
+      navigate(ROUTES.profile)
+    },
   })
 
   const onSubmit = ({ email, password }: LoginSchema) => {

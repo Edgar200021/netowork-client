@@ -7,4 +7,5 @@ export const ROUTES = {
   confirmEmailAddress: '/auth/confirm-email-address',
   verifyAccount: '/auth/verify',
   profile: '/profile',
+  profileSettings: '/profile/settings',
 } as const

@@ -1,10 +1,16 @@
 import { ROUTES } from '@/constants/routes'
 import { authSlice } from '@/store/auth/authSlice'
 import { useAppSelector } from '@/store/store'
+import { UserRole } from '@/types/user'
 import { useEffect } from 'react'
 import { Navigate, Outlet, useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 
-export const ProtectedPage = () => {
+interface Props {
+  roles?: UserRole[]
+}
+
+export const ProtectedPage = ({ roles }: Props) => {
   const user = useAppSelector(authSlice.selectors.getUser),
     isAuthorized = useAppSelector(authSlice.selectors.getIsAuthorized)
 
@@ -13,8 +19,20 @@ export const ProtectedPage = () => {
   useEffect(() => {
     if (isAuthorized) return
 
+    toast.error('Вы не авторизованы')
     navigate(ROUTES.login)
   }, [isAuthorized])
 
-  return user ? <Outlet/> : <Navigate to={ROUTES.login} />
+  useEffect(() => {
+    if (!user || !roles) return
+
+    if (!roles.includes(user.role)) {
+      toast.error('У вас нет доступа к этой странице')
+    }
+  }, [user, roles])
+
+  if (!user) return <Navigate to={ROUTES.login} />
+  if (roles && !roles.includes(user.role)) return <Navigate to={ROUTES.main} />
+
+  return <Outlet />
 }

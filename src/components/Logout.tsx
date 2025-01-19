@@ -3,6 +3,8 @@ import { useHandleApiResponse } from '@/hooks/useHandleApiResponse'
 import { useHandleError } from '@/hooks/useHandleError'
 import { cn } from '@/lib/utils'
 import { useLogoutMutation } from '@/store/auth/authApi'
+import { authSlice } from '@/store/auth/authSlice'
+import { useAppDispatch } from '@/store/store'
 import { useNavigate } from 'react-router'
 import { Button } from './ui/button'
 
@@ -13,10 +15,15 @@ interface Props {
 export const Logout = ({ className }: Props) => {
   const [logout, { isLoading, error, data }] = useLogoutMutation()
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   useHandleError(error)
   useHandleApiResponse(data, {
-    callback: () => navigate(ROUTES.main),
+    callback: () => {
+      dispatch(authSlice.actions.setUser(undefined))
+      dispatch(authSlice.actions.setIsAuthorized(false))
+      navigate(ROUTES.main)
+    },
   })
 
   return (

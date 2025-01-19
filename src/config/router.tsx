@@ -1,10 +1,12 @@
 import { ROUTES } from '@/constants/routes'
+import { MyAccountLayout } from '@/layouts/MyAccountLayout'
 import { AppLayout } from '@/layouts/AppLayout'
 import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { RegisterPage } from '@/pages/auth/RegisterPage'
 import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage'
 import { VerifyAccountPage } from '@/pages/auth/VerifyAccountPage'
+import { ProfilePage } from '@/pages/ProfilePage'
 import { ProtectedPage } from '@/pages/ProtectedPage'
 import { createBrowserRouter } from 'react-router'
 import { ConfirmEmailAddressPage } from '../pages/auth/ConfirmEmailAddressPage'
@@ -45,8 +47,18 @@ export const router = createBrowserRouter([
         element: <ProtectedPage />,
         children: [
           {
+            element: <MyAccountLayout />,
             path: ROUTES.profile,
-            element: <h1>Profile</h1>,
+            children: [
+              {
+                element: <ProfilePage />,
+                index: true,
+              },
+              {
+                path: ROUTES.profileSettings,
+                element: <h1>Settings</h1>,
+              },
+            ],
           },
         ],
       },
