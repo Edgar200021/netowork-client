@@ -7,7 +7,7 @@ import { useHandleError } from '@/hooks/useHandleError'
 import {
   resetPasswordSchema,
   ResetPasswordSchema,
-} from '@/schemas/resetPasswordSchema'
+} from '@/schemas/auth/resetPasswordSchema'
 import { useResetPasswordMutation } from '@/store/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router'

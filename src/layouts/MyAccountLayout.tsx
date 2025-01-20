@@ -15,12 +15,19 @@ export const MyAccountLayout = ({ className }: Props) => {
   if (!user) return <Navigate to={ROUTES.login} />
 
   return (
-    <div className={cn('', className)}>
-      <MyAccount user={user} className="mb-[50px]" />
-      <div className="flex items-center gap-x-6">
+    <div className={cn('sm:box', className)}>
+      <MyAccount
+        createdAt={user.createdAt}
+        firstName={user.firstName}
+        lastName={user.lastName}
+        avatar={user.avatar}
+        role={user.role}
+        className="mb-[50px] sm:-mt-10"
+      />
+      <div className="flex items-center gap-x-6 max-sm:box">
         <NavLink
           className="text-lg leading-[133%] pb-3 aria-[current=page]:border-b-2 aria-[current=page]:border-b-primary"
-		  end={true}
+          end={true}
           to={ROUTES.profile}
         >
           Обо мне

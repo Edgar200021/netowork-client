@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { registerSchema, RegisterSchema } from '@/schemas/registerSchema'
+import { registerSchema, RegisterSchema } from '@/schemas/auth/registerSchema'
 import { Controller, useForm } from 'react-hook-form'
 
 import { ROUTES } from '@/constants/routes'

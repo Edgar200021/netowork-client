@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import {
   setNewEmailSchema,
   SetNewEmailSchema,
-} from '@/schemas/setNewEmailSchema'
+} from '@/schemas/auth/setNewEmailSchema'
 import { useSetNewEmailAddressMutation } from '@/store/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { memo, useState } from 'react'

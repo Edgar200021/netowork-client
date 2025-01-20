@@ -1,6 +1,6 @@
 import { ROUTES } from '@/constants/routes'
-import { MyAccountLayout } from '@/layouts/MyAccountLayout'
 import { AppLayout } from '@/layouts/AppLayout'
+import { MyAccountLayout } from '@/layouts/MyAccountLayout'
 import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { RegisterPage } from '@/pages/auth/RegisterPage'

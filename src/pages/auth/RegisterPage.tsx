@@ -7,7 +7,7 @@ interface Props {
 
 export const RegisterPage = ({ className }: Props) => {
   return (
-    <main className={cn(className)}>
+    <main className={cn(className, 'box')}>
       <RegisterForm />
     </main>
   )

@@ -1,6 +1,12 @@
+import { TAGS } from '@/constants/redux'
 import { authSlice } from '../auth/authSlice'
 import { baseApi } from '../baseApi'
-import { GetMeRequest, GetMeResponse } from './types'
+import {
+  ChangeAboutMeRequest,
+  ChangeAboutMeResponse,
+  GetMeRequest,
+  GetMeResponse,
+} from './types'
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -14,8 +20,20 @@ export const userApi = baseApi.injectEndpoints({
         dispatch(authSlice.actions.setUser(data.data))
         dispatch(authSlice.actions.setIsAuthorized(true))
       },
+      providesTags: [TAGS.user],
+    }),
+    changeAboutMe: builder.mutation<
+      ChangeAboutMeResponse,
+      ChangeAboutMeRequest
+    >({
+      query: body => ({
+        url: '/users/change-about-me',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: [TAGS.user],
     }),
   }),
 })
 
-export const { useGetMeQuery } = userApi
+export const { useGetMeQuery, useChangeAboutMeMutation } = userApi

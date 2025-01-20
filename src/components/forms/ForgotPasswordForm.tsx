@@ -7,7 +7,7 @@ import { useHandleError } from '@/hooks/useHandleError'
 import {
   forgotPasswordSchema,
   ForgotPasswordSchema,
-} from '@/schemas/forgotPasswordSchema'
+} from '@/schemas/auth/forgotPasswordSchema'
 import { useForgotPasswordMutation } from '@/store/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'react-router'

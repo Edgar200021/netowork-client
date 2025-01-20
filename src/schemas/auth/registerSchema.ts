@@ -15,6 +15,7 @@ export const registerSchema = z
   .superRefine(({ password }, ctx) => {
     const result = zxcvbn(password)
 
+
     if (result.score == 0 || result.score == 1) {
       ctx.addIssue({
         code: 'custom',

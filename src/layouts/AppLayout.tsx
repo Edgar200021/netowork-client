@@ -5,9 +5,7 @@ export const AppLayout = () => {
   return (
     <div className="grid grid-rows-[auto_1fr_auto] gap-y-8 md:gap-y-20">
       <Header />
-      <div className='box'>
-        <Outlet />
-      </div>
+      <Outlet />
       <footer>footer</footer>
     </div>
   )

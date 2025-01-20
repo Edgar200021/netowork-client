@@ -10,8 +10,14 @@ export const useHandleError = <T extends string[]>(error?: unknown) => {
 
   useEffect(() => {
     if (!error) return
+    const rtkError = isRtkError(error)
 
-    const err = isRtkError(error) ? error.data : error
+    if (rtkError && error.originalStatus === 429) {
+      toast.error('Слишком много запросов')
+      return
+    }
+
+    const err = rtkError ? error.data : error
 
     if (isApiValidationError(err)) {
       setApiValidationErrors(err.errors)
@@ -29,11 +35,19 @@ export const useHandleError = <T extends string[]>(error?: unknown) => {
 
   const handleError = useCallback((error: unknown) => {
     if (!error) return
-    const err = isRtkError(error) ? error.data : error
+    const rtkError = isRtkError(error)
+
+    if (rtkError && error.originalStatus === 429) {
+      toast.error('Слишком много запросов')
+      return
+    }
+
+    const err = rtkError ? error.data : error
 
     if (isApiValidationError(err)) {
       setApiValidationErrors(err.errors)
     }
+
     toast.error(
       isApiError(err)
         ? err.error

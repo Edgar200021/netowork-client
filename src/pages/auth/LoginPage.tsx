@@ -7,7 +7,7 @@ interface Props {
 
 export const LoginPage = ({ className }: Props) => {
   return (
-    <main className={cn(className)}>
+    <main className={cn(className, 'box')}>
       <LoginForm />
     </main>
   )

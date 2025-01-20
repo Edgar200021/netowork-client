@@ -7,7 +7,7 @@ interface Props {
 
 export const ForgotPasswordPage = ({ className }: Props) => {
   return (
-    <main className={cn(className)}>
+    <main className={cn(className, 'box')}>
       <ForgotPasswordForm />
     </main>
   )

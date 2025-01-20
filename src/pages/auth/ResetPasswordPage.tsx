@@ -12,7 +12,7 @@ export const ResetPasswordPage = ({ className }: Props) => {
   if (!params.token) return null
 
   return (
-    <main className={cn(className)}>
+    <main className={cn(className, 'box')}>
       <ResetPasswordForm token={params.token} />
     </main>
   )

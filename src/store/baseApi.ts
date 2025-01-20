@@ -5,6 +5,7 @@ import { API_BASE_URL } from '@/constants/api'
 //  PURCHASED_PROXIES_TAG,
 //  RENTED_PROXIES_TAG,
 //} from '@/constants/redux'
+import { TAGS } from '@/constants/redux'
 import {
   BaseQueryFn,
   createApi,
@@ -48,5 +49,5 @@ export const baseApi = createApi({
       }),
     }),
   }),
-  //  tagTypes: [],
+  tagTypes: [TAGS.user],
 })
