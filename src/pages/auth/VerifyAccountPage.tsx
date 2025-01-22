@@ -12,7 +12,7 @@ export const VerifyAccountPage = ({ className }: Props) => {
   if (!params.token) return null
 
   return (
-    <main className={cn(className, 'box')}>
+    <main className={cn(className, '')}>
       <VerifyAccount token={params.token} />
     </main>
   )

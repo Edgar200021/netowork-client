@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components/forms/LoginForm'
+import { AccountSettings } from '@/components/AccountSettings/AccountSettings'
 import { ROUTES } from '@/constants/routes'
 import { cn } from '@/lib/utils'
 import { authSlice } from '@/store/auth/authSlice'
@@ -9,14 +9,14 @@ interface Props {
   className?: string
 }
 
-export const LoginPage = ({ className }: Props) => {
+export const AccountSettingsPage = ({ className }: Props) => {
   const user = useAppSelector(authSlice.selectors.getUser)
 
-  if (user) return <Navigate to={ROUTES.profile} />
+  if (!user) return <Navigate to={ROUTES.login} />
 
   return (
-    <main className={cn(className, 'box')}>
-      <LoginForm />
-    </main>
+    <div className={cn('', className)}>
+      <AccountSettings />
+    </div>
   )
 }

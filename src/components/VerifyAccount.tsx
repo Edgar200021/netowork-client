@@ -23,7 +23,6 @@ export const VerifyAccount = ({ className, token }: Props) => {
     toastText: 'Почта подтверждена',
   })
 
-  alert('AXX')
   useEffect(() => {
     verify({ token })
   }, [token])

@@ -4,12 +4,15 @@ import { ApiValidationError } from '@/types/api'
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-export const useHandleError = <T extends string[]>(error?: unknown) => {
+export const useHandleError = <T extends string[]>(
+  error?: unknown,
+  disabled: boolean = false
+) => {
   const [apiValidationErrors, setApiValidationErrors] =
     useState<ApiValidationError<T>['errors']>()
 
   useEffect(() => {
-    if (!error) return
+    if (!error || disabled) return
     const rtkError = isRtkError(error)
 
     if (rtkError && error.originalStatus === 429) {
@@ -31,7 +34,7 @@ export const useHandleError = <T extends string[]>(error?: unknown) => {
         ? err.message
         : 'Что-то пошло не так'
     )
-  }, [error])
+  }, [error, disabled])
 
   const handleError = useCallback((error: unknown) => {
     if (!error) return

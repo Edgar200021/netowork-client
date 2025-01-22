@@ -1,3 +1,4 @@
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { RouterProvider } from 'react-router'
 import { ToastContainer } from 'react-toastify'
 import { PageLoader } from './components/ui/pageLoader'
@@ -10,7 +11,7 @@ function App() {
   const { isLoading, isError } = baseApi.useHealthCheckQuery(null)
   const { isLoading: getMeLoading, error } = useGetMeQuery(null)
 
-  useHandleError(error)
+  useHandleError(error, error && (error as FetchBaseQueryError).status === 401)
 
   if (isLoading || getMeLoading) return <PageLoader />
   if (isError) return <h1>Наш сервис временно недоступен</h1>

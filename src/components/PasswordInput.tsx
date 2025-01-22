@@ -15,6 +15,7 @@ interface Props {
   inputProps?: ComponentProps<'input'>
   label?: string
   children?: ReactNode
+  calculateStrength?: boolean
 }
 
 export const PasswordInput = ({
@@ -22,6 +23,7 @@ export const PasswordInput = ({
   inputProps,
   label = 'Пароль',
   children,
+  calculateStrength = true,
 }: Props) => {
   const [password, setPassword] = useState('')
   const [type, setType] =
@@ -35,13 +37,16 @@ export const PasswordInput = ({
       <span className="leading-[140%] text-secondary-foreground">{label}</span>
       <div className="relative">
         <Input
-          value={ 2}
+          value={inputProps?.value || password}
           {...inputProps}
           type={type}
           onChange={e => {
             //@ts-expect-error ...
             inputProps?.onChange(e)
-            setPassword(e.target.value)
+
+            if (calculateStrength) {
+              setPassword(e.target.value)
+            }
           }}
           className="pr-10"
         />
@@ -59,28 +64,29 @@ export const PasswordInput = ({
             src={type === 'password' ? openIcon : closeIcon}
           />
         </Button>
-        {/*<svg width={24} height={24}>
-          <use xlinkHref={`${sprites}#eye-close`} />
-        </svg>*/}
       </div>
 
-      <div className="bg-gray-300 w-[99%] h-1">
-        <div
-          className={cn('w-full h-full', {
-            'bg-red-600': testResult.score === 1,
-            'bg-yellow-600': testResult.score === 2,
-            'bg-green-400': testResult.score === 3,
-            'bg-green-600': testResult.score === 4,
-          })}
-          style={{
-            width: `${percentage}%`,
-          }}
-        ></div>
-      </div>
-      <p className="text-sm text-secondary-foreground leading-[143%">
-        Пароль должен содержать не менее 8 символов, латиницу, цифры, один из
-        символов (!$#%)
-      </p>
+      {calculateStrength && (
+        <>
+          <div className="bg-gray-300 w-[99%] h-1">
+            <div
+              className={cn('w-full h-full', {
+                'bg-red-600': testResult.score === 1,
+                'bg-yellow-600': testResult.score === 2,
+                'bg-green-400': testResult.score === 3,
+                'bg-green-600': testResult.score === 4,
+              })}
+              style={{
+                width: `${percentage}%`,
+              }}
+            ></div>
+          </div>
+          <p className="text-sm text-secondary-foreground leading-[143%">
+            Пароль должен содержать не менее 8 символов, латиницу, цифры, один
+            из символов (!$#%)
+          </p>
+        </>
+      )}
       {children}
     </label>
   )

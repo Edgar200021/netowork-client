@@ -20,8 +20,10 @@ export const Logout = ({ className }: Props) => {
   useHandleError(error)
   useHandleApiResponse(data, {
     callback: () => {
-      dispatch(authSlice.actions.setUser(undefined))
-      dispatch(authSlice.actions.setIsAuthorized(false))
+      setTimeout(() => {
+        dispatch(authSlice.actions.setUser(undefined))
+        dispatch(authSlice.actions.setIsAuthorized(false))
+      }, 100)
       navigate(ROUTES.main)
     },
   })

@@ -7,6 +7,7 @@ import { RegisterPage } from '@/pages/auth/RegisterPage'
 import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage'
 import { VerifyAccountPage } from '@/pages/auth/VerifyAccountPage'
 import { ProfilePage } from '@/pages/ProfilePage'
+import { AccountSettingsPage } from '@/pages/ProfileSettingsPage'
 import { ProtectedPage } from '@/pages/ProtectedPage'
 import { createBrowserRouter } from 'react-router'
 import { ConfirmEmailAddressPage } from '../pages/auth/ConfirmEmailAddressPage'
@@ -56,7 +57,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ROUTES.profileSettings,
-                element: <h1>Settings</h1>,
+                element: <AccountSettingsPage />,
               },
             ],
           },

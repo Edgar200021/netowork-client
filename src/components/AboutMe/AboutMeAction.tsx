@@ -11,8 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import { useHandleApiResponse } from '@/hooks/useHandleApiResponse'
 import { useHandleError } from '@/hooks/useHandleError'
-import { changeAboutMeSchema } from '@/schemas/users/changeAboutMeSchema'
-import { useChangeAboutMeMutation } from '@/store/user/userApi'
+import { useUpdateProfileMutation } from '@/store/user/userApi'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import sprites from '../../assets/icons/sprites.svg'
@@ -34,7 +33,7 @@ interface Props {
 export const AboutMeAction = ({ className, aboutText }: Props) => {
   const [aboutMe, setAboutMe] = useState(aboutText)
   const [isOpen, setIsOpen] = useState(false)
-  const [changeAboutMe, { isLoading, error, data }] = useChangeAboutMeMutation()
+  const [updateProfile, { isLoading, error, data }] = useUpdateProfileMutation()
   const { apiValidationErrors } = useHandleError<['aboutMe']>(error)
   useHandleApiResponse(data, {
     toastText: 'Данные успешно изменены',
@@ -42,18 +41,12 @@ export const AboutMeAction = ({ className, aboutText }: Props) => {
   })
 
   const onClick = async () => {
-    console.log('Ok')
-    const obj = { aboutMe }
-    const { success, data, error } = await changeAboutMeSchema.safeParseAsync(
-      obj
-    )
-
-    if (!success) {
-      toast.error(error.flatten().fieldErrors.aboutMe?.[0] || 'Ошибка в данных')
+    if (!aboutMe.trim() || aboutMe.trim().length > 2000) {
+      toast.error('Длина описания не должна превышать 2000 символов')
       return
     }
 
-    changeAboutMe(data)
+    updateProfile({ aboutMe })
   }
 
   return (
@@ -156,7 +149,8 @@ export const AboutMeAction = ({ className, aboutText }: Props) => {
                   disabled={
                     isLoading ||
                     aboutMe.trim().length === 0 ||
-                    aboutMe.trim() === aboutText
+                    aboutMe.trim() === aboutText ||
+                    aboutMe.trim().length > 2000
                   }
                   className="w-1/2"
                 >
