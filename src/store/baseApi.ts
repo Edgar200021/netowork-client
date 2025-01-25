@@ -49,5 +49,5 @@ export const baseApi = createApi({
       }),
     }),
   }),
-  tagTypes: [TAGS.user],
+  tagTypes: [TAGS.user, TAGS.portfolio],
 })

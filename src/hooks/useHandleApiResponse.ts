@@ -15,7 +15,7 @@ export const useHandleApiResponse = <T>(
   useEffect(() => {
     if (!data) return
 
-    if (typeof data.data === 'string' && options.showToast) {
+    if (typeof data.data === 'string' && (options.showToast ?? true)) {
       toast.success(data.data)
     } else if (options.toastText) {
       toast.success(options.toastText)

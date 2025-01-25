@@ -1,5 +1,11 @@
+import { TAGS } from '@/constants/redux'
 import { baseApi } from '../baseApi'
-import { GetMyPortfolioRequest, GetMyPortfolioResponse } from './types'
+import {
+  DeletePortfolioJobRequest,
+  DeletePortfolioJobResponse,
+  GetMyPortfolioRequest,
+  GetMyPortfolioResponse,
+} from './types'
 
 export const portfolioApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -10,8 +16,20 @@ export const portfolioApi = baseApi.injectEndpoints({
       query: () => ({
         url: '/portfolio/my-portfolio',
       }),
+      providesTags: [TAGS.portfolio],
+    }),
+    deletePortfolioJob: builder.mutation<
+      DeletePortfolioJobResponse,
+      DeletePortfolioJobRequest
+    >({
+      query: ({ id }) => ({
+        url: `/portfolio/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [TAGS.portfolio],
     }),
   }),
 })
 
-export const { useGetMyPortfolioQuery } = portfolioApi
+export const { useGetMyPortfolioQuery, useDeletePortfolioJobMutation } =
+  portfolioApi

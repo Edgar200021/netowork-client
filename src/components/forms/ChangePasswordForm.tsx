@@ -23,6 +23,7 @@ export const ChangePasswordForm = ({ className }: Props) => {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ChangePasswordSchema>({
     resolver: zodResolver(changePasswordSchema),
   })
@@ -33,7 +34,11 @@ export const ChangePasswordForm = ({ className }: Props) => {
       error
     )
 
-  useHandleApiResponse(data)
+  useHandleApiResponse(data, {
+    callback: () =>
+      reset({ newPassword: '', passwordConfirm: '', oldPassword: '' }),
+    showToast: true,
+  })
 
   const onSubmit = (data: ChangePasswordSchema) => {
     changePassword(data)
