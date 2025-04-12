@@ -8,13 +8,13 @@ import { baseApi } from './store/baseApi'
 import { useGetMeQuery } from './store/user/userApi'
 
 function App() {
-  const { isLoading, isError } = baseApi.useHealthCheckQuery(null)
+//  const { isLoading, isError } = baseApi.useHealthCheckQuery(null)
   const { isLoading: getMeLoading, error } = useGetMeQuery(null)
 
   useHandleError(error, error && (error as FetchBaseQueryError).status === 401)
 
-  if (isLoading || getMeLoading) return <PageLoader />
-  if (isError) return <h1>Наш сервис временно недоступен</h1>
+  if (getMeLoading) return <PageLoader />
+//  if (error) return <h1>Наш сервис временно недоступен</h1>
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { ROUTES } from '@/constants/routes'
 import { cn, determineMonthsSpentOnSite } from '@/lib/utils'
-import { User, UserRole } from '@/types/user'
+import  {type  User, UserRole } from '@/types/user'
 import { memo } from 'react'
 import { Link } from 'react-router'
 import icon from '../assets/icons/default-profile.svg'

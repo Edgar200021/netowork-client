@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { registerSchema, RegisterSchema } from '@/schemas/auth/registerSchema'
+import { registerSchema, type RegisterSchema } from '@/schemas/auth/registerSchema'
 import { Controller, useForm } from 'react-hook-form'
 
 import { ROUTES } from '@/constants/routes'
@@ -57,6 +57,7 @@ export const RegisterForm = ({ className }: Props) => {
       lastName: data.lastName,
       email: data.email,
       password: data.password,
+	  passwordConfirmation: data.passwordConfirmation
     })
   }
 
@@ -166,9 +167,9 @@ export const RegisterForm = ({ className }: Props) => {
             <span className="leading-[140%] text-secondary-foreground">
               Подтверждение пароля
             </span>
-            <Input {...register('passwordConfirm')} required type="password" />
-            {errors.passwordConfirm?.message && (
-              <FieldErrors error={errors.passwordConfirm.message} />
+            <Input {...register('passwordConfirmation')} required type="password" />
+            {errors.passwordConfirmation?.message && (
+              <FieldErrors error={errors.passwordConfirmation.message} />
             )}
           </label>
 

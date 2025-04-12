@@ -36,7 +36,7 @@ export const ChangePasswordForm = ({ className }: Props) => {
 
   useHandleApiResponse(data, {
     callback: () =>
-      reset({ newPassword: '', passwordConfirm: '', oldPassword: '' }),
+      reset({ newPassword: '', newPasswordConfirmation: '', oldPassword: '' }),
     showToast: true,
   })
 
@@ -114,9 +114,9 @@ export const ChangePasswordForm = ({ className }: Props) => {
             <span className="leading-[140%] text-secondary-foreground">
               Подтверждение пароля
             </span>
-            <Input {...register('passwordConfirm')} required type="password" />
-            {errors.passwordConfirm?.message && (
-              <FieldErrors error={errors.passwordConfirm.message} />
+            <Input {...register('newPasswordConfirmation')} required type="password" />
+            {errors.newPasswordConfirmation?.message && (
+              <FieldErrors error={errors.newPasswordConfirmation.message} />
             )}
           </label>
         </div>

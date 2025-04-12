@@ -1,12 +1,12 @@
 import { isApiError, isApiValidationError } from '@/guards/api'
 import { isRtkError } from '@/guards/redux'
-import { ApiValidationError } from '@/types/api'
+import type { ApiValidationError } from '@/types/api'
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 export const useHandleError = <T extends string[]>(
   error?: unknown,
-  disabled: boolean = false
+  disabled = false
 ) => {
   const [apiValidationErrors, setApiValidationErrors] =
     useState<ApiValidationError<T>['errors']>()

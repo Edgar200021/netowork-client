@@ -1,5 +1,5 @@
 import { AboutMeInfo } from '@/components/AboutMe/AboutMeInfo'
-import { PortfolioList } from '@/components/Portfolio/PortfolioList'
+import { PortfolioList } from '@/components/Works/WorkLIst'
 import { ROUTES } from '@/constants/routes'
 import { cn } from '@/lib/utils'
 import { authSlice } from '@/store/auth/authSlice'

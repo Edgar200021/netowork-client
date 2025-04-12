@@ -1,4 +1,4 @@
 export const TAGS = {
   user: 'user',
-  portfolio: 'portfolio',
+  works: 'works',
 } as const

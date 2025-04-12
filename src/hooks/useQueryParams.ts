@@ -1,30 +1,30 @@
-import { useCallback } from 'react'
-import { useSearchParams } from 'react-router'
+import { useCallback } from "react";
+import { useSearchParams } from "react-router";
 
 export const useQueryParams = <T extends string[]>(
-  ...keys: T
+	...keys: T
 ): {
-  params: Partial<Record<T[number], string>>
-  setParams: (key: T[number], value: string) => void
+	params: Partial<Record<T[number], string>>;
+	setParams: (key: T[number], value: string) => void;
 } => {
-  const [params, setParams] = useSearchParams()
-  const map = new Map()
+	const [params, setParams] = useSearchParams();
+	const map = new Map();
 
-  keys.forEach(key => {
-    const value = params.get(key)
+	for (const key of keys) {
+		const value = params.get(key);
 
-    if (!value) return
+		if (!value) continue;
 
-    map.set(key, value)
-  })
+		map.set(key, value);
+	}
 
-  const setQueryParams = useCallback((key: T[number], value: string) => {
-    params.set(key, value)
-    setParams(params)
-  }, [])
+	const setQueryParams = useCallback((key: T[number], value: string) => {
+		params.set(key, value);
+		setParams(params);
+	}, []);
 
-  return {
-    params: Object.fromEntries(map) as Partial<Record<T[number], string>>,
-    setParams: setQueryParams,
-  }
-}
+	return {
+		params: Object.fromEntries(map) as Partial<Record<T[number], string>>,
+		setParams: setQueryParams,
+	};
+};

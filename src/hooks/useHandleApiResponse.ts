@@ -1,4 +1,4 @@
-import { ApiSuccessResponse } from '@/types/api'
+import type { ApiSuccessResponse } from '@/types/api'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 

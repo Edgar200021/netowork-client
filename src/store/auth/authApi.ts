@@ -1,6 +1,6 @@
 import { baseApi } from '../baseApi'
 import { authSlice } from './authSlice'
-import {
+import type {
   ForgotPasswordRequest,
   ForgotPasswordResponse,
   LoginRequest,
@@ -47,7 +47,7 @@ export const authApi = baseApi.injectEndpoints({
       VerifyAccountRequest
     >({
       query: body => ({
-        url: '/auth/verify',
+        url: '/auth/account-verification',
         method: 'PATCH',
         body,
       }),

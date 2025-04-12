@@ -1,10 +1,11 @@
+import { MIN_PASSWORD_LENGTH } from '@/constants/const'
 import { z } from 'zod'
 import zxcvbn from 'zxcvbn'
 
 export const resetPasswordSchema = z
   .object({
     token: z.string().min(1, 'Токен не может быть пустым'),
-    password: z.string().min(8, 'Минимальная длина пароля 8 символов'),
+    password: z.string().min(MIN_PASSWORD_LENGTH, 'Минимальная длина пароля 8 символов'),
     passwordConfirm: z.string(),
   })
   .superRefine(({ password }, ctx) => {

@@ -2,11 +2,11 @@ import { useHandleApiResponse } from '@/hooks/useHandleApiResponse'
 import { useHandleError } from '@/hooks/useHandleError'
 import { cn } from '@/lib/utils'
 import {
-  UpdateProfileSchema,
+  type UpdateProfileSchema,
   updateProfileSchema,
 } from '@/schemas/users/updateProfileSchema'
 import { useUpdateProfileMutation } from '@/store/user/userApi'
-import { User } from '@/types/user'
+import type { User } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { FieldErrors } from '../FieldError'
