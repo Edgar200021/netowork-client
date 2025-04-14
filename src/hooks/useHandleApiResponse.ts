@@ -1,6 +1,6 @@
-import type { ApiSuccessResponse } from '@/types/api'
-import { useEffect } from 'react'
-import { toast } from 'react-toastify'
+import type {ApiSuccessResponse} from '@/types/api';
+import {useEffect} from 'react';
+import {toast} from 'react-toastify';
 
 export const useHandleApiResponse = <T>(
   data?: ApiSuccessResponse<T>,
@@ -9,18 +9,18 @@ export const useHandleApiResponse = <T>(
     callback?: (...args: unknown[]) => void
     toastText?: string
   } = {
-    showToast: true,
+    showToast: true
   }
 ) => {
   useEffect(() => {
-    if (!data) return
+    if (!data) return;
 
     if (typeof data.data === 'string' && (options.showToast ?? true)) {
-      toast.success(data.data)
+      toast.success(options.toastText || data.data);
     } else if (options.toastText) {
-      toast.success(options.toastText)
+      toast.success(options.toastText);
     }
 
-    options.callback?.()
-  }, [data, options.showToast])
-}
+    options.callback?.();
+  }, [data, options.showToast]);
+};

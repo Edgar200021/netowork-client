@@ -1,21 +1,22 @@
-import { ROUTES } from '@/constants/routes'
-import { cn, determineMonthsSpentOnSite } from '@/lib/utils'
-import  {type  User, UserRole } from '@/types/user'
-import { memo } from 'react'
-import { Link } from 'react-router'
-import icon from '../assets/icons/default-profile.svg'
-import { Button } from './ui/button'
+import {ROUTES} from '@/constants/routes.tsx';
+import {cn, determineMonthsSpentOnSite} from '@/lib/utils.ts';
+import {type  User, UserRole} from '@/types/user.ts';
+import {memo} from 'react';
+import {Link} from 'react-router';
+import icon from '../../assets/icons/default-profile.svg';
+import {Button} from '../ui/button.tsx';
+import {UpdateAccountAvatar} from '@/components/MyAccount/UpdateAccountAvatar.tsx';
 
 interface Props
   extends Pick<
     User,
     'avatar' | 'firstName' | 'lastName' | 'createdAt' | 'role'
   > {
-  className?: string
+  className?: string;
 }
 
 export const MyAccount = memo(
-  ({ className, avatar, firstName, lastName, createdAt, role }: Props) => {
+  ({className, avatar, firstName, lastName, createdAt, role}: Props) => {
     return (
       <div
         className={cn(
@@ -24,12 +25,13 @@ export const MyAccount = memo(
         )}
       >
         <div className="flex flex-col gap-y-4 items-center  sm:flex-row sm:gap-y-0 sm:gap-x-4">
-          <div className="w-[120px] h-[120px] p-1 rounded-full bg-primary">
+          <div className="w-[120px] h-[120px] p-1 rounded-full bg-primary relative">
             <img
               className="w-full h-full object-cover rounded-full"
               src={avatar || icon}
               alt={firstName}
             />
+            <UpdateAccountAvatar className="absolute bottom-0 right-0"/>
           </div>
           <div className="flex flex-col gap-y-1 md:gap-y-[10px] items-center sm:items-start">
             <span className="text-secondary-foreground text-sm">
@@ -46,7 +48,7 @@ export const MyAccount = memo(
             </div>
           </div>
         </div>
-        <hr className="w-full hidden sm:block bg-border h-0.5" />
+        <hr className="w-full hidden sm:block bg-border h-0.5"/>
         <div className="sm:flex sm:items-center sm:gap-x-5 sm:justify-between ">
           <span className="hidden sm:inline-block text-lg sm:leading-[130%]">
             {role === UserRole.Freelancer
@@ -62,6 +64,6 @@ export const MyAccount = memo(
           </Button>
         </div>
       </div>
-    )
+    );
   }
-)
+);

@@ -1,18 +1,18 @@
-import { MyAccount } from '@/components/MyAccount'
-import { ROUTES } from '@/constants/routes'
-import { cn } from '@/lib/utils'
-import { authSlice } from '@/store/auth/authSlice'
-import { useAppSelector } from '@/store/store'
-import { Navigate, NavLink, Outlet } from 'react-router'
+import {MyAccount} from '@/components/MyAccount/MyAccount.tsx';
+import {ROUTES} from '@/constants/routes';
+import {cn} from '@/lib/utils';
+import {authSlice} from '@/store/auth/authSlice';
+import {useAppSelector} from '@/store/store';
+import {Navigate, NavLink, Outlet} from 'react-router';
 
 interface Props {
-  className?: string
+  className?: string;
 }
 
-export const MyAccountLayout = ({ className }: Props) => {
-  const user = useAppSelector(authSlice.selectors.getUser)
+export const MyAccountLayout = ({className}: Props) => {
+  const user = useAppSelector(authSlice.selectors.getUser);
 
-  if (!user) return <Navigate to={ROUTES.login} />
+  if (!user) return <Navigate to={ROUTES.login}/>;
 
   return (
     <div className={cn('sm:box', className)}>
@@ -39,7 +39,7 @@ export const MyAccountLayout = ({ className }: Props) => {
           Настройки
         </NavLink>
       </div>
-      <Outlet />
+      <Outlet/>
     </div>
-  )
-}
+  );
+};
