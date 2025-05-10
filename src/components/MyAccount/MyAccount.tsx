@@ -2,7 +2,7 @@ import {ROUTES} from '@/constants/routes.tsx';
 import {cn, determineMonthsSpentOnSite} from '@/lib/utils.ts';
 import {type  User, UserRole} from '@/types/user.ts';
 import {memo} from 'react';
-import {Link} from 'react-router';
+import {Link, Route} from 'react-router';
 import icon from '../../assets/icons/default-profile.svg';
 import {Button} from '../ui/button.tsx';
 import {UpdateAccountAvatar} from '@/components/MyAccount/UpdateAccountAvatar.tsx';
@@ -56,7 +56,7 @@ export const MyAccount = memo(
               : 'Создать задание для выполнения заказа'}
           </span>
           <Button className="w-full sm:w-[164px]" asChild>
-            <Link to={ROUTES.main}>
+            <Link to={role === UserRole.Client ? ROUTES.createTask : ROUTES.main}>
               {role === UserRole.Freelancer
                 ? 'Найти задание'
                 : 'Создать задание'}

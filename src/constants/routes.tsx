@@ -8,4 +8,5 @@ export const ROUTES = {
   verifyAccount: '/auth/verify',
   profile: '/profile',
   profileSettings: '/profile/settings',
+  createTask: '/create-task',
 } as const

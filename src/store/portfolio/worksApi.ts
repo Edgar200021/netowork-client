@@ -10,7 +10,7 @@ import type {
 	GetMyWorksResponse,
 } from "./types";
 
-export const portfolioApi = baseApi.injectEndpoints({
+export const worksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getMyWorks: builder.query<GetMyWorksResponse, GetMyWorksRequest>({
 			query: () => ({
@@ -30,11 +30,10 @@ export const portfolioApi = baseApi.injectEndpoints({
 
 				return { url: "/works", method: "POST", body: formData };
 			},
-			//invalidatesTags: [TAGS.works],
 			onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
 				const { data } = await queryFulfilled;
 				dispatch(
-					portfolioApi.util.updateQueryData("getMyWorks", null, (draft) => {
+					worksApi.util.updateQueryData("getMyWorks", null, (draft) => {
 						draft.data.push(data.data);
 					}),
 				);
@@ -46,12 +45,11 @@ export const portfolioApi = baseApi.injectEndpoints({
 					url: `/works/${id}`,
 					method: "DELETE",
 				}),
-				//invalidatesTags: [TAGS.works],
 				onQueryStarted: async ({ id }, { dispatch, queryFulfilled }) => {
 					console.log("QUERY STARTEDDDD", id);
 					await queryFulfilled;
 					dispatch(
-						portfolioApi.util.updateQueryData("getMyWorks", null, (draft) => {
+						worksApi.util.updateQueryData("getMyWorks", null, (draft) => {
 							draft.data = draft.data.filter((work) => work.id !== id);
 						}),
 					);
@@ -61,4 +59,4 @@ export const portfolioApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetMyWorksQuery, useCreateWorkMutation, useDeleteWorkMutation } = portfolioApi;
+export const { useGetMyWorksQuery, useCreateWorkMutation, useDeleteWorkMutation } = worksApi;
