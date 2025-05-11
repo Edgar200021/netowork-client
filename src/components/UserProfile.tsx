@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover";
 import { ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { User } from "@/types/user";
+import { UserRole, type User } from "@/types/user";
 import { useState } from "react";
 import { Link } from "react-router";
 import defaultProfileIcon from "../assets/icons/default-profile.svg";
@@ -42,6 +42,19 @@ export const UserProfile = ({ className, user }: Props) => {
 							Профиль
 						</Link>
 					</Button>
+
+					{user.role === UserRole.Client && (
+						<Button
+							onClick={closePopover}
+							asChild
+							variant="ghost"
+							className="hover:no-underline rounded-xl py-2 px-3 w-full justify-start"
+						>
+							<Link className="no-underline" to={ROUTES.myTasks}>
+								Мои заказы
+							</Link>
+						</Button>
+					)}
 					<Logout />
 				</PopoverContent>
 			</Popover>

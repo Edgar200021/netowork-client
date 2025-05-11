@@ -5,6 +5,8 @@ import type {
 	CreateTaskResponse,
 	GetAllTasksRequest,
 	GetAllTasksResponse,
+	GetMyTasksRequest,
+	GetMyTasksResponse,
 } from "./types";
 
 export const tasksApi = baseApi.injectEndpoints({
@@ -12,6 +14,15 @@ export const tasksApi = baseApi.injectEndpoints({
 		getAllTasks: builder.query<GetAllTasksResponse, GetAllTasksRequest>({
 			query: (body) => ({
 				url: "/tasks",
+				params: {
+					...body,
+				},
+			}),
+		}),
+
+		getMyTasks: builder.query<GetMyTasksResponse, GetMyTasksRequest>({
+			query: (body) => ({
+				url: "/tasks/my-tasks",
 				params: {
 					...body,
 				},
@@ -48,4 +59,8 @@ export const tasksApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetAllTasksQuery, useCreateTaskMutation } = tasksApi;
+export const {
+	useGetAllTasksQuery,
+	useGetMyTasksQuery,
+	useCreateTaskMutation,
+} = tasksApi;

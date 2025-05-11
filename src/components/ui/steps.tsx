@@ -15,7 +15,7 @@ export const Steps = ({ className, step, totalSteps }: Props) => {
 					key={index}
 					style={{ width: `${widthPercent}%` }}
 					className={cn(
-						'h-2 bg-gray-300 rounded-md transition-colors duration-300 ease',
+						"h-2 bg-gray-300 rounded-md transition-colors duration-300 ease",
 						{
 							"bg-primary": step >= index + 1,
 						},

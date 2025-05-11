@@ -24,3 +24,20 @@ export const determineMonthsSpentOnSite = (date: Date | string): string => {
 			? "1 месяц"
 			: `${months} месяцев`;
 };
+
+export function formatDate(
+	dateInput: Date | string,
+	locale: string = "ru-RU",
+	prefix: string = "Создано",
+	options: Intl.DateTimeFormatOptions = {
+		day: "2-digit",
+		month: "long",
+		year: "numeric",
+	},
+): string {
+	const date = new Date(dateInput);
+
+	const formatter = new Intl.DateTimeFormat(locale, options);
+
+	return `${prefix} ${formatter.format(date)}`;
+}

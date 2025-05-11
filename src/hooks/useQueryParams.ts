@@ -6,6 +6,7 @@ export const useQueryParams = <T extends string[]>(
 ): {
 	params: Partial<Record<T[number], string>>;
 	setParams: (key: T[number], value: string) => void;
+	deleteParams: (key: T[number]) => void;
 } => {
 	const [params, setParams] = useSearchParams();
 	const map = new Map();
@@ -23,8 +24,14 @@ export const useQueryParams = <T extends string[]>(
 		setParams(params);
 	}, []);
 
+	const deleteQueryParams = useCallback((key: T[number]) => {
+		params.delete(key);
+		setParams(params);
+	}, []);
+
 	return {
 		params: Object.fromEntries(map) as Partial<Record<T[number], string>>,
 		setParams: setQueryParams,
+		deleteParams: deleteQueryParams,
 	};
 };

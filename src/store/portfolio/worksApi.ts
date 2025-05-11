@@ -59,4 +59,8 @@ export const worksApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetMyWorksQuery, useCreateWorkMutation, useDeleteWorkMutation } = worksApi;
+export const {
+	useGetMyWorksQuery,
+	useCreateWorkMutation,
+	useDeleteWorkMutation,
+} = worksApi;

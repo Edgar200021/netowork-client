@@ -1,5 +1,5 @@
 export const TAGS = {
-  user: 'user',
-  works: 'works',
-  tasks: 'tasks',
-} as const
+	user: "user",
+	works: "works",
+	tasks: "tasks",
+} as const;

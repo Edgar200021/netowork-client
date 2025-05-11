@@ -26,3 +26,6 @@ export const TASK_FILES_ALLOWED_TYPES = [
 	"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 export const TASK_FILES_MAX_COUNT = 3;
+
+export const GET_TASKS_DEFAULT_LIMIT = 50;
+export const GET_TASKS_DEFAULT_PAGE = 1;

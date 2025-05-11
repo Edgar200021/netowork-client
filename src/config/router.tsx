@@ -10,6 +10,7 @@ import { RegisterPage } from "@/pages/auth/RegisterPage";
 import { ResetPasswordPage } from "@/pages/auth/ResetPasswordPage";
 import { VerifyAccountPage } from "@/pages/auth/VerifyAccountPage";
 import { CreateTaskPage } from "@/pages/tasks/CreateTaskPage";
+import { MyTasksPage } from "@/pages/tasks/MyTasksPage";
 import { UserRole } from "@/types/user";
 import { createBrowserRouter } from "react-router";
 import { ConfirmEmailAddressPage } from "../pages/auth/ConfirmEmailAddressPage";
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
 					{
 						element: <CreateTaskPage />,
 						path: ROUTES.createTask,
+					},
+					{
+						element: <MyTasksPage />,
+						path: ROUTES.myTasks,
 					},
 				],
 			},

@@ -1,19 +1,19 @@
-import { useQueryParams } from '@/hooks/useQueryParams'
-import { cn } from '@/lib/utils'
-import { VerifyAccount } from '../../components/VerifyAccount'
+import { useQueryParams } from "@/hooks/useQueryParams";
+import { cn } from "@/lib/utils";
+import { VerifyAccount } from "../../components/VerifyAccount";
 
 interface Props {
-  className?: string
+	className?: string;
 }
 
 export const VerifyAccountPage = ({ className }: Props) => {
-  const { params } = useQueryParams('token')
+	const { params } = useQueryParams("token");
 
-  if (!params.token) return null
+	if (!params.token) return null;
 
-  return (
-    <main className={cn(className, '')}>
-      <VerifyAccount token={params.token} />
-    </main>
-  )
-}
+	return (
+		<main className={cn(className, "")}>
+			<VerifyAccount token={params.token} />
+		</main>
+	);
+};
