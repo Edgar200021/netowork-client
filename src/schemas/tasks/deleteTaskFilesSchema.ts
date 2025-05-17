@@ -1,12 +1,12 @@
 import { z } from "zod";
+import { deleteTaskSchema } from "./deleteTaskSchema";
 
-export const deleteTaskFilesSchema = z.object({
-	taskId: z.coerce.number().positive({
-		message: "ID задачи должно быть больше 0",
-	}),
-	fileId: z.string().nonempty({
-		message: "ID файла не может быть пустым",
-	}),
-});
+export const deleteTaskFilesSchema = z
+	.object({
+		fileId: z.string().nonempty({
+			message: "ID файла не может быть пустым",
+		}),
+	})
+	.merge(deleteTaskSchema);
 
 export type DeleteTaskFilesSchema = z.infer<typeof deleteTaskFilesSchema>;

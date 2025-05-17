@@ -5,6 +5,8 @@ import { taskSelectors } from "./taskSlice";
 import {
 	DeleteTaskFilesRequest,
 	DeleteTaskFilesResponse,
+	DeleteTaskRequest,
+	DeleteTaskResponse,
 	type CreateTaskRequest,
 	type CreateTaskResponse,
 	type GetAllTasksRequest,
@@ -111,14 +113,33 @@ export const tasksApi = baseApi.injectEndpoints({
 			},
 		}),
 
+		deleteTask: builder.mutation<DeleteTaskResponse, DeleteTaskRequest>({
+			query: (body) => ({
+				url: `/tasks/${body.taskId}`,
+				method: "DELETE",
+			}),
+
+			onQueryStarted: async (arg, { dispatch, getState, queryFulfilled }) => {
+				await queryFulfilled;
+
+				const state = getState() as RootState;
+				const queryArgs = taskSelectors.getMyTasksFilters({ task: state.task });
+
+				dispatch(
+					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
+						draft.data = draft.data.filter((t) => t.id !== arg.taskId);
+					}),
+				);
+			},
+		}),
+
 		deleteTaskFiles: builder.mutation<
 			DeleteTaskFilesResponse,
 			DeleteTaskFilesRequest
 		>({
 			query: (body) => ({
-				url: `/tasks/${body.taskId}/files`,
+				url: `/tasks/${body.taskId}/files/${encodeURIComponent(body.fileId)}`,
 				method: "DELETE",
-				body,
 			}),
 			onQueryStarted: async (arg, { dispatch, getState, queryFulfilled }) => {
 				const { data } = await queryFulfilled;
@@ -149,5 +170,6 @@ export const {
 	useGetMyTasksQuery,
 	useCreateTaskMutation,
 	useUpdateTaskMutation,
+	useDeleteTaskMutation,
 	useDeleteTaskFilesMutation,
 } = tasksApi;

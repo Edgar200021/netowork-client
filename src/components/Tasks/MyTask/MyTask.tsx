@@ -1,13 +1,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn, formatDate } from "@/lib/utils";
-import type { Task } from "@/types/task";
+import { TaskStatus, type Task } from "@/types/task";
 import { User } from "@/types/user";
-import { Button } from "../../ui/button";
-import { Checkbox } from "../../ui/checkbox";
 import { MyTaskCategory } from "./MyTaskCategory";
+import { MyTaskDelete } from "./MyTaskDelete";
 import { MyTaskDescription } from "./MyTaskDescription";
 import { MyTaskFiles } from "./MyTaskFiles";
 import { MyTaskPrice } from "./MyTaskPrice";
+import { MyTaskReplyNotify } from "./MyTaskReplyNotify";
 
 interface Props extends Task {
 	className?: string;
@@ -25,6 +25,7 @@ export const MyTask = ({
 	description,
 	files,
 	userEmail,
+	status,
 }: Props) => {
 	return (
 		<div className={cn("md:p-8 flex flex-col gap-y-8", className)}>
@@ -77,7 +78,7 @@ export const MyTask = ({
 						<MyTaskPrice taskId={id} price={price} />
 						<MyTaskFiles taskId={id} files={files} />
 					</dl>
-					<Button variant="destructive">Отменить заказ</Button>
+					{status === TaskStatus.Open && <MyTaskDelete taskId={id} />}
 				</TabsContent>
 				<TabsContent value="responses">
 					<div className="max-w-[578px] mb-4">
@@ -90,18 +91,11 @@ export const MyTask = ({
 							увидят задание и откликнутся на него
 						</p>
 					</div>
-					<div className="flex flex-col gap-y-[38px] md:flex-row md:justify-between">
-						<div className="flex items-center gap-x-4">
-							<Checkbox />
-							<p className="text-sm">
-								Уведомлять меня о новых откликах к заданию по e-mail: &nbsp;
-								{userEmail}
-							</p>
-						</div>
-						<Button variant="destructive" className="w-fit">
-							Отменить заказ
-						</Button>
-					</div>
+					<MyTaskReplyNotify
+						status={status}
+						userEmail={userEmail}
+						taskId={id}
+					/>
 				</TabsContent>
 			</Tabs>
 		</div>

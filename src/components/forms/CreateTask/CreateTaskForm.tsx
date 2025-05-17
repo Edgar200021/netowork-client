@@ -32,8 +32,8 @@ import {
 	SelectValue,
 } from "../../ui/select";
 import { CreateTaskButton } from "./CreateTaskButton";
-import { useNavigate } from 'react-router';
-import { ROUTES } from '@/constants/routes';
+import { useNavigate } from "react-router";
+import { ROUTES } from "@/constants/routes";
 
 interface Props {
 	className?: string;
@@ -91,7 +91,7 @@ export const CreateTaskForm = ({ className }: Props) => {
 
 	const categoryId = watch("categoryId");
 	const files = watch("files");
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const category = useMemo(
 		() => data?.data.find((category) => category.id === categoryId),
@@ -102,7 +102,7 @@ export const CreateTaskForm = ({ className }: Props) => {
 	const onSubmit = async (data: CreateTaskSchema) => {
 		try {
 			await createTask(data).unwrap();
-			navigate(ROUTES.myTasks)
+			navigate(ROUTES.myTasks);
 		} catch (error) {
 			handleError(error);
 		}
