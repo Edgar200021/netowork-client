@@ -1,14 +1,17 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn, formatDate } from "@/lib/utils";
 import type { Task } from "@/types/task";
+import { User } from "@/types/user";
 import { Button } from "../../ui/button";
 import { Checkbox } from "../../ui/checkbox";
 import { MyTaskCategory } from "./MyTaskCategory";
 import { MyTaskDescription } from "./MyTaskDescription";
+import { MyTaskFiles } from "./MyTaskFiles";
 import { MyTaskPrice } from "./MyTaskPrice";
 
 interface Props extends Task {
 	className?: string;
+	userEmail: User["email"];
 }
 
 export const MyTask = ({
@@ -21,6 +24,7 @@ export const MyTask = ({
 	subCategory,
 	description,
 	files,
+	userEmail,
 }: Props) => {
 	return (
 		<div className={cn("md:p-8 flex flex-col gap-y-8", className)}>
@@ -70,19 +74,8 @@ export const MyTask = ({
 							subCategory={subCategory}
 						/>
 						<MyTaskDescription taskId={id} description={description} />
-
-						{files.length > 0 && (
-							<div className="flex flex-col gap-y-2">
-								<dt className="font-semibold text-xl leading-[130%] ">Файлы</dt>
-								{files.map((file, index) => (
-									<dd key={index} className="leading-[140%]">
-										{file}
-									</dd>
-								))}
-							</div>
-						)}
-
 						<MyTaskPrice taskId={id} price={price} />
+						<MyTaskFiles taskId={id} files={files} />
 					</dl>
 					<Button variant="destructive">Отменить заказ</Button>
 				</TabsContent>
@@ -101,8 +94,8 @@ export const MyTask = ({
 						<div className="flex items-center gap-x-4">
 							<Checkbox />
 							<p className="text-sm">
-								Уведомлять меня о новых откликах к заданию по e-mail:
-								arimovrenat@gmail.com
+								Уведомлять меня о новых откликах к заданию по e-mail: &nbsp;
+								{userEmail}
 							</p>
 						</div>
 						<Button variant="destructive" className="w-fit">

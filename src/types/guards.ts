@@ -1,10 +1,9 @@
-import { Task } from "./task";
+import { Task, TaskStatus } from "./task";
 
-const statuses: Task["status"][] = ["completed", "in_progress", "open"];
 export const isTaskStatus = (
 	status: string | null | undefined,
 ): status is Task["status"] => {
 	if (!status) return false;
 
-	return statuses.some((s) => s === status);
+	return Object.values(TaskStatus).some((s) => s === status);
 };

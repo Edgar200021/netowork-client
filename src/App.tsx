@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import { PageLoader } from "./components/ui/pageLoader";
 import { router } from "./config/router";
 import { useHandleError } from "./hooks/useHandleError";
-import { baseApi } from "./store/baseApi";
 import { useGetMeQuery } from "./store/user/userApi";
 
 function App() {

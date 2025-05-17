@@ -32,6 +32,8 @@ import {
 	SelectValue,
 } from "../../ui/select";
 import { CreateTaskButton } from "./CreateTaskButton";
+import { useNavigate } from 'react-router';
+import { ROUTES } from '@/constants/routes';
 
 interface Props {
 	className?: string;
@@ -89,6 +91,7 @@ export const CreateTaskForm = ({ className }: Props) => {
 
 	const categoryId = watch("categoryId");
 	const files = watch("files");
+	const navigate = useNavigate()
 
 	const category = useMemo(
 		() => data?.data.find((category) => category.id === categoryId),
@@ -99,6 +102,7 @@ export const CreateTaskForm = ({ className }: Props) => {
 	const onSubmit = async (data: CreateTaskSchema) => {
 		try {
 			await createTask(data).unwrap();
+			navigate(ROUTES.myTasks)
 		} catch (error) {
 			handleError(error);
 		}
@@ -324,12 +328,38 @@ export const CreateTaskForm = ({ className }: Props) => {
 														if (!f) return;
 														if (files!.length === TASK_FILES_MAX_COUNT) return;
 
+														const fileArray = Array.from(f).slice(
+															0,
+															TASK_FILES_MAX_COUNT - files!.length,
+														);
+
+														if (!files!.length)
+															return field.onChange(fileArray);
+
 														field.onChange([
 															...files!,
-															...Array.from(f).slice(
-																0,
-																TASK_FILES_MAX_COUNT - files!.length,
-															),
+															...fileArray.filter((f) => {
+																for (const file of files!) {
+																	if (
+																		JSON.stringify({
+																			lastModified: f.lastModified,
+																			name: f.name,
+																			size: f.size,
+																			type: f.type,
+																		}) ===
+																		JSON.stringify({
+																			lastModified: file.lastModified,
+																			name: file.name,
+																			size: file.size,
+																			type: file.type,
+																		})
+																	) {
+																		return false;
+																	}
+																}
+
+																return true;
+															}),
 														]);
 													}}
 													multiple

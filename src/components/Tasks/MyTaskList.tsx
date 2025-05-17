@@ -5,9 +5,13 @@ import {
 import { useHandleError } from "@/hooks/useHandleError";
 import { useQueryParams } from "@/hooks/useQueryParams";
 import { cn } from "@/lib/utils";
+import { authSelectors } from "@/store/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useGetMyTasksQuery } from "@/store/tasks/taskApi";
+import { taskSelectors, taskSlice } from "@/store/tasks/taskSlice";
 import { isTaskStatus } from "@/types/guards";
-import { Task } from "@/types/task";
+import { Task, TaskStatus } from "@/types/task";
+import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { Loader } from "../ui/loader";
 import { MyTask } from "./MyTask/MyTask";
@@ -22,15 +26,15 @@ const statusFilters: { label: string; status?: Task["status"] }[] = [
 	},
 	{
 		label: "Согласование условий",
-		status: "open",
+		status: TaskStatus.Open,
 	},
 	{
 		label: "В работе",
-		status: "in_progress",
+		status: TaskStatus.InProgress,
 	},
 	{
 		label: "Закрытые",
-		status: "completed",
+		status: TaskStatus.Completed,
 	},
 ];
 
@@ -40,18 +44,30 @@ export const MyTaskList = ({ className }: Props) => {
 		setParams,
 		deleteParams,
 	} = useQueryParams("limit", "page", "status");
-	const { data, isLoading, error } = useGetMyTasksQuery({
+
+	const filtersFromQuery = {
 		limit: Number(limit) || GET_TASKS_DEFAULT_LIMIT,
 		page: Number(page) || GET_TASKS_DEFAULT_PAGE,
+		...(Number(page) && { page: Number(page) }),
 		...(isTaskStatus(status) && {
 			status,
 		}),
-	});
+	};
+
+	const dispatch = useAppDispatch();
+	const filters = useAppSelector(taskSelectors.getMyTasksFilters);
+	const { data, isLoading, error } = useGetMyTasksQuery(filters);
+
+	const me = useAppSelector(authSelectors.getUser);
 
 	useHandleError(error);
 
+	useEffect(() => {
+		dispatch(taskSlice.actions.setMyTasksFilters(filtersFromQuery));
+	}, [filtersFromQuery.status, filtersFromQuery.page, filtersFromQuery.limit]);
+
 	if (isLoading) return <Loader size="lg" />;
-	if (error || !data) return null;
+	if (error || !data || !me) return null;
 
 	return (
 		<div className={cn(className, "")}>
@@ -88,7 +104,7 @@ export const MyTaskList = ({ className }: Props) => {
 			<ul className={"flex flex-col gap-y-[50px]"}>
 				{data.data.map((task) => (
 					<li key={task.id}>
-						<MyTask {...task} />
+						<MyTask {...task} userEmail={me.email} />
 					</li>
 				))}
 			</ul>

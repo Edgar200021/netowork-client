@@ -30,3 +30,5 @@ export const authSlice = createSlice({
 		getUser: (state) => state.user,
 	},
 });
+
+export const { selectors: authSelectors, actions: authActions } = authSlice;

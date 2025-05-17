@@ -1,3 +1,4 @@
+import { FieldErrors } from "@/components/FieldError";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -6,6 +7,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useUpdateMyTask } from "@/hooks/useUpdateMyTask";
 import { Task } from "@/types/task";
 import { useState } from "react";
 import sprites from "../../../assets/icons/sprites.svg";
@@ -19,6 +21,14 @@ export const MyTaskPrice = ({ price, taskId }: Props) => {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState(price);
 
+	const { onSubmit, apiValidationErrors, errors, isLoading } = useUpdateMyTask(
+		{
+			price: value,
+			taskId,
+		},
+		["price"],
+		value === price,
+	);
 	return (
 		<div className="flex flex-col gap-y-2">
 			<dt className="font-semibold text-xl leading-[130%] flex items-center gap-x- ">
@@ -45,16 +55,19 @@ export const MyTaskPrice = ({ price, taskId }: Props) => {
 								required
 								type="number"
 								value={value}
-								onChange={(e) => setValue(e.target.valueAsNumber)}
+								onChange={(e) => setValue(Number(e.target.value))}
 							/>
-							{/*{(errors.price?.message || apiValidationErrors?.price) && (
-									<FieldErrors
-										error={errors.price?.message || apiValidationErrors!.price!}
-									/>
-								)}*/}
+							{(errors.price || apiValidationErrors?.price) && (
+								<FieldErrors
+									error={apiValidationErrors?.price || errors.price!}
+								/>
+							)}
 						</label>
-						<Button disabled={value === price || !value}>
-							Изменить описание
+						<Button
+							onClick={onSubmit}
+							disabled={isLoading || value === price || !value}
+						>
+							Изменить стоимость
 						</Button>
 					</DialogContent>
 				</Dialog>

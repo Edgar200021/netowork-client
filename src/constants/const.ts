@@ -24,6 +24,7 @@ export const TASK_FILES_ALLOWED_TYPES = [
 	"application/msword",
 	"application/pdf",
 	"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+	"text/plain",
 ];
 export const TASK_FILES_MAX_COUNT = 3;
 

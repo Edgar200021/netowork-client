@@ -1,3 +1,4 @@
+import { FieldErrors } from "@/components/FieldError";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -9,6 +10,7 @@ import {
 	MAX_TASK_DESCRIPTION_LENGTH,
 	MIN_TASK_DESCRIPTION_LENGTH,
 } from "@/constants/const";
+import { useUpdateMyTask } from "@/hooks/useUpdateMyTask";
 import { Task } from "@/types/task";
 import { useState } from "react";
 import sprites from "../../../assets/icons/sprites.svg";
@@ -21,6 +23,16 @@ interface Props {
 export const MyTaskDescription = ({ description, taskId }: Props) => {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState(description);
+
+	const { onSubmit, apiValidationErrors, errors, isLoading } = useUpdateMyTask(
+		{
+			description: value,
+			taskId,
+		},
+		["description"],
+		value === description,
+	);
+
 	return (
 		<div className="flex flex-col gap-y-2">
 			<dt className="font-semibold text-xl leading-[130%] flex items-center gap-x- ">
@@ -50,12 +62,18 @@ export const MyTaskDescription = ({ description, taskId }: Props) => {
 									rows={10}
 								/>
 
-								{/*{apiValidationErrors?.categoryId && (
-																	<FieldErrors error={apiValidationErrors.categoryId!} />
-																)}*/}
+								{(apiValidationErrors?.description || errors.description) && (
+									<FieldErrors
+										error={
+											apiValidationErrors?.description || errors.description!
+										}
+									/>
+								)}
 							</div>
 						</div>
-						<Button>Изменить описание</Button>
+						<Button onClick={onSubmit} disabled={isLoading}>
+							Изменить описание
+						</Button>
 					</DialogContent>
 				</Dialog>
 			</dt>

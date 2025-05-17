@@ -17,6 +17,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { useHandleError } from "@/hooks/useHandleError";
+import { useUpdateMyTask } from "@/hooks/useUpdateMyTask";
 import { useState } from "react";
 import sprites from "../../../assets/icons/sprites.svg";
 
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export const MyTaskCategory = ({
+	taskId,
 	category: categoryLabel,
 	subCategory,
 }: Props) => {
@@ -37,10 +39,24 @@ export const MyTaskCategory = ({
 		categoryId: 0,
 		subCategoryId: 0,
 	});
-	const { apiValidationErrors } = useHandleError(error);
+	useHandleError(error);
+
+	const {
+		onSubmit,
+		isLoading: updateTaskLoading,
+		apiValidationErrors,
+		errors,
+	} = useUpdateMyTask(
+		{
+			categoryId: newCategory.categoryId,
+			subCategoryId: newCategory.subCategoryId,
+			taskId,
+		},
+		["categoryId", "subCategoryId"],
+		!newCategory.categoryId || !newCategory.subCategoryId,
+	);
 
 	const onOpen = async () => {
-		console.log("IS OPEN", open);
 		if (!open) {
 			setOpen(true);
 			if (!data) {
@@ -58,8 +74,6 @@ export const MyTaskCategory = ({
 	const currentSubcategory = category?.subCategories.find(
 		(sub) => sub.name === subCategory,
 	);
-
-	const onSubmit = () => {};
 
 	return (
 		<div className="flex flex-col gap-y-2">
@@ -93,7 +107,9 @@ export const MyTaskCategory = ({
 										}}
 										value={String(newCategory.categoryId)}
 										required
-										disabled={isLoading || isError || !data}
+										disabled={
+											isLoading || updateTaskLoading || isError || !data
+										}
 									>
 										<SelectTrigger className="py-5">
 											<SelectValue />
@@ -111,8 +127,12 @@ export const MyTaskCategory = ({
 									</Select>
 								</label>
 
-								{apiValidationErrors?.categoryId && (
-									<FieldErrors error={apiValidationErrors.categoryId!} />
+								{(apiValidationErrors?.categoryId || errors.categoryId) && (
+									<FieldErrors
+										error={
+											apiValidationErrors?.categoryId || errors.categoryId!
+										}
+									/>
 								)}
 							</div>
 							<div className="flex flex-col gap-y-4 w-full">
@@ -127,7 +147,13 @@ export const MyTaskCategory = ({
 										}
 										value={String(newCategory.subCategoryId)}
 										required
-										disabled={isLoading || isError || !data || !category}
+										disabled={
+											isLoading ||
+											updateTaskLoading ||
+											isError ||
+											!data ||
+											!category
+										}
 									>
 										<SelectTrigger className="py-5">
 											<SelectValue />
@@ -148,14 +174,35 @@ export const MyTaskCategory = ({
 										</SelectContent>
 									</Select>
 								</label>
+								{(apiValidationErrors?.subCategoryId ||
+									errors.subCategoryId) && (
+									<FieldErrors
+										error={
+											apiValidationErrors?.subCategoryId ||
+											errors.subCategoryId!
+										}
+									/>
+								)}
 							</div>
 						</div>
-						<Button onClick={onSubmit}>Изменить категорию</Button>
+						<Button
+							disabled={
+								isLoading ||
+								updateTaskLoading ||
+								isError ||
+								newCategory.categoryId === 0 ||
+								newCategory.subCategoryId === 0
+							}
+							onClick={onSubmit}
+						>
+							Изменить категорию
+						</Button>
 					</DialogContent>
 				</Dialog>
 			</dt>
 			<dd className="leading-[140%]">
-				{categoryLabel}-{subCategory}
+				{categoryLabel}
+				{subCategory && ` - ${subCategory}`}
 			</dd>
 		</div>
 	);

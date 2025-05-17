@@ -39,7 +39,6 @@ export const createTaskSchema = z.object({
 	}),
 	files: z
 		.array(z.instanceof(File))
-		.min(1, { message: "Минимальное количество файлов 1" })
 		.max(TASK_FILES_MAX_COUNT, {
 			message: `Максимальное количество файлов ${TASK_FILES_MAX_COUNT}`,
 		})
