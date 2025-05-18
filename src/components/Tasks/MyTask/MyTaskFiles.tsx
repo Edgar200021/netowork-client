@@ -15,11 +15,11 @@ import {
 import { useHandleError } from "@/hooks/useHandleError";
 import { useUpdateMyTask } from "@/hooks/useUpdateMyTask";
 import {
+	type DeleteTaskFilesSchema,
 	deleteTaskFilesSchema,
-	DeleteTaskFilesSchema,
 } from "@/schemas/tasks/deleteTaskFilesSchema";
 import { useDeleteTaskFilesMutation } from "@/store/tasks/taskApi";
-import { Task } from "@/types/task";
+import type { Task } from "@/types/task";
 import { useRef, useState } from "react";
 import sprites from "../../../assets/icons/sprites.svg";
 

@@ -2,8 +2,8 @@ import {
 	GET_TASKS_DEFAULT_LIMIT,
 	GET_TASKS_DEFAULT_PAGE,
 } from "@/constants/const";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { GetMyTasksRequest } from "./types";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { GetMyTasksRequest } from "./types";
 
 type State = {
 	getMyTasksFilters: GetMyTasksRequest;
@@ -13,6 +13,10 @@ const initialState: State = {
 		limit: GET_TASKS_DEFAULT_LIMIT,
 		page: GET_TASKS_DEFAULT_PAGE,
 	},
+	//getTasksFilters: {
+	//	limit: GET_TASKS_DEFAULT_LIMIT,
+	//	page: GET_TASKS_DEFAULT_PAGE,
+	//}
 };
 
 export const taskSlice = createSlice({

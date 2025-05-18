@@ -11,6 +11,7 @@ import { ResetPasswordPage } from "@/pages/auth/ResetPasswordPage";
 import { VerifyAccountPage } from "@/pages/auth/VerifyAccountPage";
 import { CreateTaskPage } from "@/pages/tasks/CreateTaskPage";
 import { MyTasksPage } from "@/pages/tasks/MyTasksPage";
+import { TasksPage } from "@/pages/tasks/TasksPage";
 import { UserRole } from "@/types/user";
 import { createBrowserRouter } from "react-router";
 import { ConfirmEmailAddressPage } from "../pages/auth/ConfirmEmailAddressPage";
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
 							},
 						],
 					},
+					{
+						element: <MyAccountLayout />,
+						path: ROUTES.myOrders,
+					},
 				],
 			},
 			{
@@ -76,6 +81,15 @@ export const router = createBrowserRouter([
 					{
 						element: <MyTasksPage />,
 						path: ROUTES.myTasks,
+					},
+				],
+			},
+			{
+				element: <ProtectedPage roles={[UserRole.Freelancer]} />,
+				children: [
+					{
+						element: <TasksPage />,
+						path: ROUTES.tasks,
 					},
 				],
 			},

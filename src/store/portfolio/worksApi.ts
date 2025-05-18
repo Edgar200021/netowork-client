@@ -30,7 +30,7 @@ export const worksApi = baseApi.injectEndpoints({
 
 				return { url: "/works", method: "POST", body: formData };
 			},
-			onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
 				const { data } = await queryFulfilled;
 				dispatch(
 					worksApi.util.updateQueryData("getMyWorks", null, (draft) => {
@@ -46,7 +46,6 @@ export const worksApi = baseApi.injectEndpoints({
 					method: "DELETE",
 				}),
 				onQueryStarted: async ({ id }, { dispatch, queryFulfilled }) => {
-					console.log("QUERY STARTEDDDD", id);
 					await queryFulfilled;
 					dispatch(
 						worksApi.util.updateQueryData("getMyWorks", null, (draft) => {

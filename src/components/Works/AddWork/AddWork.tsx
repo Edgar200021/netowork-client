@@ -7,8 +7,10 @@ import { Button } from "../../ui/button";
 import {
 	Drawer,
 	DrawerContent,
+	DrawerDescription,
 	DrawerFooter,
 	DrawerHeader,
+	DrawerTitle,
 	DrawerTrigger,
 } from "../../ui/drawer";
 import { AddWorkFooter } from "./AddWorkFooter";
@@ -61,13 +63,13 @@ export const AddWork = () => {
 					</DrawerTrigger>
 					<DrawerContent className="bg-white">
 						<DrawerHeader className="mb-5 px-[10px]">
-							<DialogDescription className="hidden">
+							<DrawerDescription className="hidden">
 								Adding works
-							</DialogDescription>
+							</DrawerDescription>
 
-							<DialogTitle className="font-bold text-[22px] leading-[130%] text-center">
+							<DrawerTitle className="font-bold text-[22px] leading-[130%] text-center">
 								Добавить работы в портфолио
-							</DialogTitle>
+							</DrawerTitle>
 						</DrawerHeader>
 						<AddWorkImages />
 						<DrawerFooter className="px-[10px]">

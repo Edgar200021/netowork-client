@@ -1,9 +1,9 @@
 import type { CreateTaskSchema } from "@/schemas/tasks/createTaskSchema";
-import { DeleteTaskFilesSchema } from "@/schemas/tasks/deleteTaskFilesSchema";
-import { DeleteTaskSchema } from "@/schemas/tasks/deleteTaskSchema";
+import type { DeleteTaskFilesSchema } from "@/schemas/tasks/deleteTaskFilesSchema";
+import type { DeleteTaskSchema } from "@/schemas/tasks/deleteTaskSchema";
 import type { GetAllTasksSchema } from "@/schemas/tasks/getAllTasksSchema";
-import { GetMyTasksSchema } from "@/schemas/tasks/getMyTasksSchema";
-import { UpdateTaskSchema } from "@/schemas/tasks/updateTaskSchema";
+import type { GetMyTasksSchema } from "@/schemas/tasks/getMyTasksSchema";
+import type { UpdateTaskSchema } from "@/schemas/tasks/updateTaskSchema";
 import type { ApiSuccessResponse } from "@/types/api";
 import type { Task } from "@/types/task";
 

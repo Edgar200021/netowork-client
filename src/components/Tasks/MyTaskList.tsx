@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useGetMyTasksQuery } from "@/store/tasks/taskApi";
 import { taskSelectors, taskSlice } from "@/store/tasks/taskSlice";
 import { isTaskStatus } from "@/types/guards";
-import { Task, TaskStatus } from "@/types/task";
+import { type Task, TaskStatus } from "@/types/task";
 import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { Loader } from "../ui/loader";
@@ -94,9 +94,7 @@ export const MyTaskList = ({ className }: Props) => {
 									"opacity-100": status === s,
 								},
 							)}
-						>
-							axxxx
-						</span>
+						/>
 					</Button>
 				))}
 			</div>

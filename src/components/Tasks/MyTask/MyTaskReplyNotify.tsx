@@ -1,6 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { Task, TaskStatus } from "@/types/task";
-import { User } from "@/types/user";
+import { type Task, TaskStatus } from "@/types/task";
+import type { User } from "@/types/user";
 import { MyTaskDelete } from "./MyTaskDelete";
 
 interface Props {

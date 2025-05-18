@@ -1,5 +1,5 @@
 import { useLazyGetCategoriesQuery } from "@/store/category/categoryApi";
-import { Task } from "@/types/task";
+import type { Task } from "@/types/task";
 
 import { FieldErrors } from "@/components/FieldError";
 import { Button } from "@/components/ui/button";

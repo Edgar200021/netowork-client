@@ -19,6 +19,7 @@ export const Logout = ({ className }: Props) => {
 
 	useHandleError(error);
 	useHandleApiResponse(data, {
+		toastText: "Вы успешно вышли из аккаунта",
 		callback: () => {
 			setTimeout(() => {
 				dispatch(authSlice.actions.setUser(undefined));

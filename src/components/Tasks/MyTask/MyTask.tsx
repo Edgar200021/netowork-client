@@ -1,7 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn, formatDate } from "@/lib/utils";
-import { TaskStatus, type Task } from "@/types/task";
-import { User } from "@/types/user";
+import { cn } from "@/lib/utils";
+import { type Task, TaskStatus } from "@/types/task";
+import type { User } from "@/types/user";
+import { TaskHeader } from "../TaskHeader";
 import { MyTaskCategory } from "./MyTaskCategory";
 import { MyTaskDelete } from "./MyTaskDelete";
 import { MyTaskDescription } from "./MyTaskDescription";
@@ -29,23 +30,7 @@ export const MyTask = ({
 }: Props) => {
 	return (
 		<div className={cn("md:p-8 flex flex-col gap-y-8", className)}>
-			<div className="flex flex-col gap-y-4">
-				<div className="flex items-center justify-between">
-					<div className="flex items-center gap-x-4">
-						<p className="font-bold text-[22px] md:text-[32px] leading-[130%]">
-							{title}
-						</p>
-					</div>
-					<span className="hidden md:block text-[32px] leading-[140%]">
-						до {price} руб.
-					</span>
-				</div>
-				<p className="leading-[140%]">{formatDate(createdAt)}</p>
-				<span className=" md:hidden text-[22px] leading-[140%]">
-					до {price} руб.
-				</span>
-			</div>
-
+			<TaskHeader title={title} price={price} createdAt={createdAt} />
 			<Tabs defaultValue="taskDetails">
 				<TabsList className="mb-8 text-base border-[1px] border-border p-0">
 					<TabsTrigger

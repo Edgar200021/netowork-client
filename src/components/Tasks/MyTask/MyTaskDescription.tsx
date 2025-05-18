@@ -11,7 +11,7 @@ import {
 	MIN_TASK_DESCRIPTION_LENGTH,
 } from "@/constants/const";
 import { useUpdateMyTask } from "@/hooks/useUpdateMyTask";
-import { Task } from "@/types/task";
+import type { Task } from "@/types/task";
 import { useState } from "react";
 import sprites from "../../../assets/icons/sprites.svg";
 

@@ -10,4 +10,6 @@ export const ROUTES = {
 	profileSettings: "/profile/settings",
 	createTask: "/client/create-task",
 	myTasks: "/client/my-tasks",
+	myOrders: "/freelancer/my-orders",
+	tasks: "/tasks",
 } as const;
