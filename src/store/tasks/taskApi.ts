@@ -1,31 +1,47 @@
 import { TASK_FILES_NAME } from "@/constants/const";
 import { baseApi } from "../baseApi";
-import { RootState } from "../store";
+import type { RootState } from "../store";
 import { taskSelectors } from "./taskSlice";
-import {
+import type {
+	CreateTaskRequest,
+	CreateTaskResponse,
 	DeleteTaskFilesRequest,
 	DeleteTaskFilesResponse,
 	DeleteTaskRequest,
 	DeleteTaskResponse,
-	type CreateTaskRequest,
-	type CreateTaskResponse,
-	type GetAllTasksRequest,
-	type GetAllTasksResponse,
-	type GetMyTasksRequest,
-	type GetMyTasksResponse,
-	type UpdateTaskRequest,
-	type UpdateTaskResponse,
+	GetAllTasksRequest,
+	GetAllTasksResponse,
+	GetMyTasksRequest,
+	GetMyTasksResponse,
+	UpdateTaskRequest,
+	UpdateTaskResponse,
 } from "./types";
 
 export const tasksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getAllTasks: builder.query<GetAllTasksResponse, GetAllTasksRequest>({
-			query: (body) => ({
+			query: (body) => {
+				return {
+				
 				url: "/tasks",
 				params: {
-					...body,
+					limit: body.limit,
+					page: body.page,
+					
+					...(body.subCategoryIds &&
+						body.subCategoryIds.length > 0 && {
+							subCategoryIds: body.subCategoryIds.join(","),
+						}),
+					...(body.sort &&
+						body.sort.length > 0 && {
+							sort: body.sort.join(","),
+						}),
+					...(body.search?.trim() && {
+						search: body.search,
+					}),
 				},
-			}),
+			}
+			},
 		}),
 
 		getMyTasks: builder.query<GetMyTasksResponse, GetMyTasksRequest>({
@@ -63,7 +79,7 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						draft.data.push(data.data);
+						draft.data.unshift(data.data);
 					}),
 				);
 			},

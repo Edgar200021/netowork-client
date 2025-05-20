@@ -16,3 +16,7 @@ export type Task = {
 	files: { fileUrl: string; fileId: string; fileName: string }[];
 	status: TaskStatus;
 };
+
+
+
+export type TasksSort = `${Extract<keyof Task, "createdAt" | "price">}-${"desc" | "asc"}`

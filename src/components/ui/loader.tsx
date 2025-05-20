@@ -5,7 +5,8 @@ const loaderVariants = cva("", {
 	variants: {
 		variant: {
 			default: "bg-primary",
-			page: "bg-primary ",
+			secondary: "bg-secondary",
+			destructive: "bg-destructive",
 		},
 		size: {
 			default: "w-[50px] p-2",

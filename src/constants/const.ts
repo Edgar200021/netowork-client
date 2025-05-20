@@ -30,3 +30,7 @@ export const TASK_FILES_MAX_COUNT = 3;
 
 export const GET_TASKS_DEFAULT_LIMIT = 50;
 export const GET_TASKS_DEFAULT_PAGE = 1;
+
+
+
+export const SORT_ORDER_SEPARATOR = "-"
