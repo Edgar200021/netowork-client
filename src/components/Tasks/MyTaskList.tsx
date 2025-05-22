@@ -31,7 +31,7 @@ export const MyTaskList = ({ className }: Props) => {
 			<TaskStatuses />
 
 			<ul className={"flex flex-col gap-y-[50px]"}>
-				{data.data.map((task) => (
+				{data.data.tasks.map((task) => (
 					<li key={task.id}>
 						<MyTask {...task} userEmail={me.email} />
 					</li>

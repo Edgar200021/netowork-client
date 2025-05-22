@@ -47,9 +47,10 @@ export const TaskCategories = memo(
 		useMediaQuery("(min-width: 768px)", () => {
 			if (isOpened) {
 				setIsOpened(false);
+				setIsDialogOpened(true);
 			}
 		});
-		useMediaQuery("(max-width: 768px) and (min-width: 1280px)", () => {
+		useMediaQuery("(max-width: 767px), (min-width: 1280px)", () => {
 			if (isDialogOpened) {
 				setIsDialogOpened(false);
 			}
@@ -97,7 +98,7 @@ export const TaskCategories = memo(
 							<DrawerFooter className="px-[10px]">
 								<ul className="flex flex-col gap-y-[10px] max-h-[800px] overflow-y-auto">
 									<li className="flex items-center justify-between gap-x-2">
-										<span className="text-sm font-semibold">Все категории</span>
+										<span className="font-semibold">Все категории</span>
 										<Button
 											onClick={() =>
 												dispatch(
@@ -137,7 +138,10 @@ export const TaskCategories = memo(
 													tabIndex={0}
 													className="flex items-center justify-between"
 												>
-													<span className="font-semibold">{category.name}</span>
+													<span className="font-semibold">
+														{category.name.slice(0, 1).toUpperCase() +
+															category.name.slice(1)}
+													</span>
 													<svg
 														className={cn("text-black size-4", {
 															"rotate-180": isCollapsed,
@@ -225,7 +229,7 @@ export const TaskCategories = memo(
 							<DialogFooter className="px-[10px] ">
 								<ul className="flex flex-col gap-y-[10px] max-h-[800px] overflow-y-auto w-full">
 									<li className="flex items-center justify-between gap-x-2">
-										<span className="text-sm font-semibold">Все категории</span>
+										<span className="font-semibold">Все категории</span>
 										<Button
 											onClick={() =>
 												dispatch(
@@ -265,7 +269,10 @@ export const TaskCategories = memo(
 													tabIndex={0}
 													className="flex items-center justify-between"
 												>
-													<span className="font-semibold">{category.name}</span>
+													<span className="font-semibold">
+														{category.name.slice(0, 1).toUpperCase() +
+															category.name.slice(1)}
+													</span>
 													<svg
 														className={cn("text-black size-4", {
 															"rotate-180": isCollapsed,
@@ -330,7 +337,7 @@ export const TaskCategories = memo(
 					{!isLoading && (
 						<ul className="flex flex-col gap-y-[10px] max-w-fit items-start">
 							<li className="flex items-center gap-x-2 flex-row-reverse pl-5">
-								<span className="text-sm font-semibold">Все категории</span>
+								<span className="font-semibold">Все категории</span>
 								<Button
 									onClick={() =>
 										dispatch(

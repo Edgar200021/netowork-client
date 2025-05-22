@@ -1,5 +1,6 @@
 import { TaskCategories } from "@/components/Tasks/TaskCategories";
 import { TaskFilters } from "@/components/Tasks/TaskFIlters";
+import { TaskPagination } from '@/components/Tasks/TaskPagination';
 import { TaskSearch } from "@/components/Tasks/TaskSearch";
 import { TaskSort } from "@/components/Tasks/TaskSort";
 import { TasksList } from "@/components/Tasks/TasksList";
@@ -16,7 +17,7 @@ export const TasksPage = ({ className }: Props) => {
 			<div className="box">
 				<TaskFilters selector="getAllTasksFilters" />
 				<TaskSearch className="mb-10 md:mb-20" />
-				<div className="md:hidden flex items-center gap-x-2 fixed bottom-10 left-1/2 -translate-x-1/2">
+				<div className="md:hidden flex items-center gap-x-2 fixed bottom-10 left-1/2 -translate-x-1/2 z-50">
 					<TaskCategories />
 					<TaskSort />
 				</div>

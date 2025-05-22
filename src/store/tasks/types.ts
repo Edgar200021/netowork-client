@@ -8,10 +8,16 @@ import type { ApiSuccessResponse } from "@/types/api";
 import type { Task } from "@/types/task";
 
 export type GetAllTasksRequest = GetAllTasksSchema;
-export type GetAllTasksResponse = ApiSuccessResponse<Task[]>;
+export type GetAllTasksResponse = ApiSuccessResponse<{
+	tasks: Task[],
+	totalCount:number
+}>;
 
 export type GetMyTasksRequest = GetMyTasksSchema;
-export type GetMyTasksResponse = ApiSuccessResponse<Task[]>;
+export type GetMyTasksResponse = ApiSuccessResponse<{
+	tasks: Task[],
+	totalCount:number
+}>;
 
 export type CreateTaskRequest = CreateTaskSchema;
 export type CreateTaskResponse = ApiSuccessResponse<Task>;

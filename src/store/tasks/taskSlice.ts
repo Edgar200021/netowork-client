@@ -32,11 +32,18 @@ export const taskSlice = createSlice({
 				...action.payload,
 			};
 		},
+		setMyTasksFiltersPage: (state, action: PayloadAction<number>) => {
+			state.getMyTasksFilters.page = action.payload;
+		},
+
 		setAllTasksFilters: (state, action: PayloadAction<GetAllTasksRequest>) => {
 			state.getAllTasksFilters = {
 				...state.getAllTasksFilters,
 				...action.payload,
 			};
+		},
+		setAllTasksFiltersPage: (state, action: PayloadAction<number>) => {
+			state.getAllTasksFilters.page = action.payload;
 		},
 		setAllTasksFiltersSubCategoryIds: (state, action: PayloadAction<number>) => {
 			if (!state.getAllTasksFilters.subCategoryIds) {
@@ -83,12 +90,16 @@ export const taskSlice = createSlice({
 	selectors: {
 		getMyTasksFilters: (state) => state.getMyTasksFilters,
 		getMyTasksFiltersStatus: (state) => state.getMyTasksFilters.status,
+		getMyTasksFiltersPage: (state) => state.getMyTasksFilters.page,
+		getMyTasksFiltersLimit: (state) => state.getMyTasksFilters.limit,
 
 		getAllTasksFilters: (state) => state.getAllTasksFilters,
 		getAllTasksFiltersSearch: (state) => state.getAllTasksFilters.search,
 		getAllTasksFiltersSort: (state) => state.getAllTasksFilters.sort,
 		getAllTasksFiltersSubCategoryIds: (state) =>
 			state.getAllTasksFilters.subCategoryIds,
+		getAllTasksFiltersPage: (state) => state.getAllTasksFilters.page,
+		getAllTasksFiltersLimit: (state) => state.getAllTasksFilters.limit,
 	},
 });
 

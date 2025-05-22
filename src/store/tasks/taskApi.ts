@@ -79,7 +79,7 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						draft.data.unshift(data.data);
+						draft.data.tasks.unshift(data.data);
 					}),
 				);
 			},
@@ -115,13 +115,13 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						const index = draft.data.findIndex((t) => t.id === data.data.id);
+						const index = draft.data.tasks.findIndex((t) => t.id === data.data.id);
 						if (index === -1) {
 							return;
 						}
 
-						draft.data[index] = {
-							...draft.data[index],
+						draft.data.tasks[index] = {
+							...draft.data.tasks[index],
 							...data.data,
 						};
 					}),
@@ -143,7 +143,7 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						draft.data = draft.data.filter((t) => t.id !== arg.taskId);
+						draft.data.tasks = draft.data.tasks.filter((t) => t.id !== arg.taskId);
 					}),
 				);
 			},
@@ -165,13 +165,13 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						const index = draft.data.findIndex((t) => t.id === arg.taskId);
+						const index = draft.data.tasks.findIndex((t) => t.id === arg.taskId);
 						if (index === -1) {
 							return;
 						}
 
-						draft.data[index] = {
-							...draft.data[index],
+						draft.data.tasks[index] = {
+							...draft.data.tasks[index],
 							...data.data,
 						};
 					}),
