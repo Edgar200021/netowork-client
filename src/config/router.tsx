@@ -11,6 +11,7 @@ import { ResetPasswordPage } from "@/pages/auth/ResetPasswordPage";
 import { VerifyAccountPage } from "@/pages/auth/VerifyAccountPage";
 import { CreateTaskPage } from "@/pages/tasks/CreateTaskPage";
 import { MyTasksPage } from "@/pages/tasks/MyTasksPage";
+import { SpecificTaskPage } from "@/pages/tasks/SpecificTaskPage";
 import { TasksPage } from "@/pages/tasks/TasksPage";
 import { UserRole } from "@/types/user";
 import { createBrowserRouter } from "react-router";
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
 					{
 						element: <TasksPage />,
 						path: ROUTES.tasks,
+					},
+					{
+						element: <SpecificTaskPage />,
+						path: ROUTES.specificTask(),
 					},
 				],
 			},

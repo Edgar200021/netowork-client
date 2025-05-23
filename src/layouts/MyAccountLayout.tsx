@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { authSlice } from "@/store/auth/authSlice";
 import { useAppSelector } from "@/store/store";
 import { UserRole } from "@/types/user";
-import { NavLink, Navigate, Outlet, useOutlet } from "react-router";
+import { NavLink, Navigate, useOutlet } from "react-router";
 
 interface Props {
 	className?: string;
@@ -17,8 +17,6 @@ export const MyAccountLayout = ({ className }: Props) => {
 	const { data } = useGetMyOrders(user?.role === UserRole.Client);
 
 	if (!user) return <Navigate to={ROUTES.login} />;
-
-	console.log("DATA", data);
 
 	return (
 		<div className={cn("sm:box", className)}>
@@ -55,7 +53,9 @@ export const MyAccountLayout = ({ className }: Props) => {
 			{
 				//TODO
 			}
-			{!outlet && user.role === UserRole.Freelancer && "Place for my-orders list"}
+			{!outlet &&
+				user.role === UserRole.Freelancer &&
+				"Place for my-orders list"}
 		</div>
 	);
 };

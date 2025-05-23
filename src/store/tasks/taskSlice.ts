@@ -4,12 +4,13 @@ import {
 	SORT_ORDER_SEPARATOR,
 } from "@/constants/const";
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
-import type { TasksSort } from "../../types/task";
+import type { Task, TasksSort } from "../../types/task";
 import type { GetAllTasksRequest, GetMyTasksRequest } from "./types";
 
 type State = {
 	getMyTasksFilters: GetMyTasksRequest;
 	getAllTasksFilters: GetAllTasksRequest;
+	specificTask?: Task
 };
 const initialState: State = {
 	getMyTasksFilters: {
@@ -20,6 +21,7 @@ const initialState: State = {
 		limit: GET_TASKS_DEFAULT_LIMIT,
 		page: GET_TASKS_DEFAULT_PAGE,
 	},
+	specificTask: undefined
 };
 
 export const taskSlice = createSlice({
@@ -86,6 +88,10 @@ export const taskSlice = createSlice({
 
 			state.getAllTasksFilters.sort.push(action.payload);
 		},
+
+		setSpecificTask: (state, action: PayloadAction<Task>) => {
+			state.specificTask = action.payload
+		}
 	},
 	selectors: {
 		getMyTasksFilters: (state) => state.getMyTasksFilters,
@@ -100,6 +106,8 @@ export const taskSlice = createSlice({
 			state.getAllTasksFilters.subCategoryIds,
 		getAllTasksFiltersPage: (state) => state.getAllTasksFilters.page,
 		getAllTasksFiltersLimit: (state) => state.getAllTasksFilters.limit,
+
+		getSpecificTask: (state) => state.specificTask
 	},
 });
 

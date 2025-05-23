@@ -45,7 +45,7 @@ export const TasksPage = ({ className }: Props) => {
 					/>
 
 					<TaskSort mobileClassName="hidden" />
-					<TasksList className="col-span-2 xl:col-span-1 xl:col-start-2" />
+					<TasksList className="col-span-2 xl:col-span-1 xl:col-start-2" loaderClassName='col-span-2 max-w-auto mx-auto mt-20 xl:mt-0' />
 				</div>
 			</div>
 		</main>

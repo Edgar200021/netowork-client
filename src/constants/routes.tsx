@@ -1,3 +1,5 @@
+export const SPECIFIC_TASK_PARAM = "taskId";
+
 export const ROUTES = {
 	main: "/",
 	register: "/auth/register",
@@ -12,4 +14,5 @@ export const ROUTES = {
 	myTasks: "/client/my-tasks",
 	myOrders: "/freelancer/my-orders",
 	tasks: "/tasks",
+	specificTask: (taskId?: number) => taskId ? `/tasks/${taskId}` : `/tasks/:${SPECIFIC_TASK_PARAM}`,
 } as const;
