@@ -77,11 +77,12 @@ export const CreateTaskForm = ({ className }: Props) => {
 			apiValidationErrors.categoryId ||
 			apiValidationErrors.subCategoryId
 		) {
-			setStep(1);
+			return setStep(1);
+			
 		}
 
 		if (apiValidationErrors.description) {
-			setStep(2);
+			return setStep(2);
 		}
 
 		if (apiValidationErrors.price) {

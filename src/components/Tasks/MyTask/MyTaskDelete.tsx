@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useHandleError } from "@/hooks/useHandleError";
 import { deleteTaskSchema } from "@/schemas/tasks/deleteTaskSchema";
 import { useDeleteTaskMutation } from "@/store/tasks/taskApi";
-import { Task } from "@/types/task";
+import type { Task } from "@/types/task";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 

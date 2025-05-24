@@ -34,8 +34,6 @@ export const ReplyToTask = ({ className, price }: Props) => {
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const [text, setText] = useState("");
 
-	console.log("TEXTTT", text);
-
 	useMediaQuery("(min-width: 768px)", () => {
 		if (isOpened) {
 			if (textAreaRef.current) {
@@ -66,7 +64,6 @@ export const ReplyToTask = ({ className, price }: Props) => {
 				<Drawer open={isOpened} onOpenChange={setIsOpened}>
 					<DrawerTrigger asChild className="md:hidden">
 						<Button className="w-full">
-							{/*{isLoading && <Loader size="sm" variant="secondary" />}*/}
 							Откликнуться
 						</Button>
 					</DrawerTrigger>

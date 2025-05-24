@@ -3,6 +3,7 @@ import type { DeleteTaskFilesSchema } from "@/schemas/tasks/deleteTaskFilesSchem
 import type { DeleteTaskSchema } from "@/schemas/tasks/deleteTaskSchema";
 import type { GetAllTasksSchema } from "@/schemas/tasks/getAllTasksSchema";
 import type { GetMyTasksSchema } from "@/schemas/tasks/getMyTasksSchema";
+import type { GetTaskSchema } from '@/schemas/tasks/getTaskSchema';
 import type { UpdateTaskSchema } from "@/schemas/tasks/updateTaskSchema";
 import type { ApiSuccessResponse } from "@/types/api";
 import type { Task } from "@/types/task";
@@ -18,6 +19,9 @@ export type GetMyTasksResponse = ApiSuccessResponse<{
 	tasks: Task[],
 	totalCount:number
 }>;
+
+export type GetTaskRequest = GetTaskSchema
+export type GetTaskResponse = ApiSuccessResponse<Task>
 
 export type CreateTaskRequest = CreateTaskSchema;
 export type CreateTaskResponse = ApiSuccessResponse<Task>;

@@ -13,6 +13,8 @@ import type {
 	GetAllTasksResponse,
 	GetMyTasksRequest,
 	GetMyTasksResponse,
+	GetTaskRequest,
+	GetTaskResponse,
 	UpdateTaskRequest,
 	UpdateTaskResponse,
 } from "./types";
@@ -22,25 +24,24 @@ export const tasksApi = baseApi.injectEndpoints({
 		getAllTasks: builder.query<GetAllTasksResponse, GetAllTasksRequest>({
 			query: (body) => {
 				return {
-				
-				url: "/tasks",
-				params: {
-					limit: body.limit,
-					page: body.page,
-					
-					...(body.subCategoryIds &&
-						body.subCategoryIds.length > 0 && {
-							subCategoryIds: body.subCategoryIds.join(","),
+					url: "/tasks",
+					params: {
+						limit: body.limit,
+						page: body.page,
+
+						...(body.subCategoryIds &&
+							body.subCategoryIds.length > 0 && {
+								subCategoryIds: body.subCategoryIds.join(","),
+							}),
+						...(body.sort &&
+							body.sort.length > 0 && {
+								sort: body.sort.join(","),
+							}),
+						...(body.search?.trim() && {
+							search: body.search,
 						}),
-					...(body.sort &&
-						body.sort.length > 0 && {
-							sort: body.sort.join(","),
-						}),
-					...(body.search?.trim() && {
-						search: body.search,
-					}),
-				},
-			}
+					},
+				};
 			},
 		}),
 
@@ -50,6 +51,12 @@ export const tasksApi = baseApi.injectEndpoints({
 				params: {
 					...body,
 				},
+			}),
+		}),
+
+		getTask: builder.query<GetTaskResponse, GetTaskRequest>({
+			query: (body) => ({
+				url: `/tasks/${body.taskId}`,
 			}),
 		}),
 
@@ -115,7 +122,9 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						const index = draft.data.tasks.findIndex((t) => t.id === data.data.id);
+						const index = draft.data.tasks.findIndex(
+							(t) => t.id === data.data.id,
+						);
 						if (index === -1) {
 							return;
 						}
@@ -143,7 +152,9 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						draft.data.tasks = draft.data.tasks.filter((t) => t.id !== arg.taskId);
+						draft.data.tasks = draft.data.tasks.filter(
+							(t) => t.id !== arg.taskId,
+						);
 					}),
 				);
 			},
@@ -165,7 +176,9 @@ export const tasksApi = baseApi.injectEndpoints({
 
 				dispatch(
 					tasksApi.util.updateQueryData("getMyTasks", queryArgs, (draft) => {
-						const index = draft.data.tasks.findIndex((t) => t.id === arg.taskId);
+						const index = draft.data.tasks.findIndex(
+							(t) => t.id === arg.taskId,
+						);
 						if (index === -1) {
 							return;
 						}
@@ -184,6 +197,7 @@ export const tasksApi = baseApi.injectEndpoints({
 export const {
 	useGetAllTasksQuery,
 	useGetMyTasksQuery,
+	useLazyGetTaskQuery,
 	useCreateTaskMutation,
 	useUpdateTaskMutation,
 	useDeleteTaskMutation,

@@ -32,9 +32,9 @@ export const TasksPage = ({ className }: Props) => {
 								<div
 									ref={ref as React.RefObject<HTMLDivElement>}
 									className={cn(
-										"max-md:hidden col-span-1 row-span-2 self-start sticky top-0 left-0 transition-transform duration-300 ease",
+										"max-md:hidden col-span-1 row-span-2 self-start xl:sticky xl:top-0 xl:left-0 transition-transform duration-300 ease",
 										{
-											"translate-y-[60px]": !isInView,
+											"xl:translate-y-[60px]": !isInView,
 										},
 									)}
 								>

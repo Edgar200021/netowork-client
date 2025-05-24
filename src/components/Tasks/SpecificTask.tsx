@@ -1,20 +1,14 @@
 import { cn } from "@/lib/utils";
-import { useAppSelector } from "@/store/store";
-import { taskSelectors } from "@/store/tasks/taskSlice";
 import type { Task } from "@/types/task";
-import { Button } from "../ui/button";
 import { ReplyToTask } from "./ReplyToTask";
 import { TaskHeader } from "./TaskHeader";
 
 interface Props {
 	className?: string;
-	taskId: Task["id"];
+	task: Task;
 }
 
-export const SpecificTask = ({ className, taskId }: Props) => {
-	const task = useAppSelector(taskSelectors.getSpecificTask);
-
-	if (!task) return null;
+export const SpecificTask = ({ className, task }: Props) => {
 	return (
 		<div
 			className={cn(
@@ -50,13 +44,13 @@ export const SpecificTask = ({ className, taskId }: Props) => {
 
 					<ReplyToTask
 						className="max-md:hidden"
-						taskId={taskId}
+						taskId={task.id}
 						price={task.price}
 					/>
 				</div>
 			</dl>
 
-			<ReplyToTask className="md:hidden" taskId={taskId} price={task.price} />
+			<ReplyToTask className="md:hidden" taskId={task.id} price={task.price} />
 		</div>
 	);
 };
