@@ -26,8 +26,8 @@ export const useTaskFilters = <
 ) => {
 	const {
 		params: { limit, page, status, sort, subCategoryIds },
-		setParams, 
-		deleteParams
+		setParams,
+		deleteParams,
 	} = useQueryParams<(keyof (GetAllTasksRequest & GetMyTasksRequest))[]>(
 		"limit",
 		"page",
@@ -37,9 +37,7 @@ export const useTaskFilters = <
 	);
 	const dispatch = useAppDispatch();
 
-	const filters = useAppSelector(
-		taskSlice.selectors[selector],
-	);
+	const filters = useAppSelector(taskSlice.selectors[selector]);
 
 	const filtersFromQuery: GetAllTasksRequest & GetMyTasksRequest = {
 		limit: Number(limit) || GET_TASKS_DEFAULT_LIMIT,
@@ -75,7 +73,6 @@ export const useTaskFilters = <
 		})();
 	}, []);
 
-
 	useEffect(() => {
 		for (const [key, value] of Object.entries(filters)) {
 			if (!value) {
@@ -83,8 +80,10 @@ export const useTaskFilters = <
 				continue;
 			}
 
-			setParams(key as keyof (GetAllTasksRequest & GetMyTasksRequest), Array.isArray(value) ? value.join(",") : String(value));
-
+			setParams(
+				key as keyof (GetAllTasksRequest & GetMyTasksRequest),
+				Array.isArray(value) ? value.join(",") : String(value),
+			);
 		}
-	}, [filters])
+	}, [filters]);
 };

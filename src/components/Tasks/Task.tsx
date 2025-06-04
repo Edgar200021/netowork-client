@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import sprites from "../../assets/icons/sprites.svg";
 import { Button } from "../ui/button";
 
-interface Props extends TTask {
+interface Props {
 	className?: string;
 	task: TTask;
 }

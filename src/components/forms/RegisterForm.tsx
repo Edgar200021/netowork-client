@@ -117,10 +117,10 @@ export const RegisterForm = ({ className }: Props) => {
 							Имя
 						</span>
 						<Input {...register("firstName")} required />
-						{(apiValidationErrors?.firstName || errors.firstName?.message) && (
+						{(apiValidationErrors.firstName || errors.firstName?.message) && (
 							<FieldErrors
 								error={
-									apiValidationErrors?.firstName || errors.firstName!.message!
+									apiValidationErrors.firstName || errors.firstName!.message!
 								}
 							/>
 						)}
@@ -130,10 +130,10 @@ export const RegisterForm = ({ className }: Props) => {
 							Фамилия
 						</span>
 						<Input {...register("lastName")} required />
-						{(apiValidationErrors?.lastName || errors.lastName?.message) && (
+						{(apiValidationErrors.lastName || errors.lastName?.message) && (
 							<FieldErrors
 								error={
-									apiValidationErrors?.lastName || errors.lastName!.message!
+									apiValidationErrors.lastName || errors.lastName!.message!
 								}
 							/>
 						)}
@@ -143,9 +143,9 @@ export const RegisterForm = ({ className }: Props) => {
 							Email
 						</span>
 						<Input {...register("email")} type="email" required />
-						{(apiValidationErrors?.email || errors.email?.message) && (
+						{(apiValidationErrors.email || errors.email?.message) && (
 							<FieldErrors
-								error={apiValidationErrors?.email || errors.email!.message!}
+								error={apiValidationErrors.email || errors.email!.message!}
 							/>
 						)}
 					</label>
@@ -154,11 +154,10 @@ export const RegisterForm = ({ className }: Props) => {
 						name="password"
 						render={({ field }) => (
 							<PasswordInput inputProps={field}>
-								{(apiValidationErrors?.password ||
-									errors.password?.message) && (
+								{(apiValidationErrors.password || errors.password?.message) && (
 									<FieldErrors
 										error={
-											apiValidationErrors?.password || errors.password!.message!
+											apiValidationErrors.password || errors.password!.message!
 										}
 									/>
 								)}

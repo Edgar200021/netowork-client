@@ -7,6 +7,6 @@ export const AppLayout = () => {
 			<Header />
 			<Outlet />
 			<footer>footer</footer>
-			</>
+		</>
 	);
 };

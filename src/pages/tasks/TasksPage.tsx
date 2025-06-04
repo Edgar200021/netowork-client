@@ -1,6 +1,5 @@
 import { TaskCategories } from "@/components/Tasks/TaskCategories";
 import { TaskFilters } from "@/components/Tasks/TaskFIlters";
-import { TaskPagination } from '@/components/Tasks/TaskPagination';
 import { TaskSearch } from "@/components/Tasks/TaskSearch";
 import { TaskSort } from "@/components/Tasks/TaskSort";
 import { TasksList } from "@/components/Tasks/TasksList";
@@ -45,7 +44,10 @@ export const TasksPage = ({ className }: Props) => {
 					/>
 
 					<TaskSort mobileClassName="hidden" />
-					<TasksList className="col-span-2 xl:col-span-1 xl:col-start-2" loaderClassName='col-span-2 max-w-auto mx-auto mt-20 xl:mt-0' />
+					<TasksList
+						className="col-span-2 xl:col-span-1 xl:col-start-2"
+						loaderClassName="col-span-2 max-w-auto mx-auto mt-20 xl:mt-0"
+					/>
 				</div>
 			</div>
 		</main>

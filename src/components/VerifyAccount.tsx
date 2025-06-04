@@ -30,6 +30,7 @@ export const VerifyAccount = ({ className, token }: Props) => {
 	if (isLoading) return <PageLoader />;
 	if (!data) return null;
 
+	const role = data.data.role;
 	return (
 		<div
 			className={cn(
@@ -44,7 +45,9 @@ export const VerifyAccount = ({ className, token }: Props) => {
 				Ваша почта подтверждена
 			</span>
 			<Button className="w-[90%] text-lg" asChild>
-				<Link to={ROUTES.main}>
+				<Link
+					to={role === UserRole.Freelancer ? ROUTES.tasks : ROUTES.createTask}
+				>
 					{data.data.role === UserRole.Freelancer
 						? "Найти задание"
 						: "Создать задание"}

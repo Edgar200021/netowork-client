@@ -22,8 +22,14 @@ import {
 	DialogHeader,
 	DialogTrigger,
 } from "@/components/ui/dialog.tsx";
+import { cn } from "@/lib/utils";
 
-export const AddWork = () => {
+interface Props {
+	mobileClassName?: string;
+	desktopClassName?: string;
+}
+
+export const AddWork = ({ mobileClassName, desktopClassName }: Props) => {
 	const isOpened = useAppSelector(workSelectors.getIsOpened);
 	const isDialogOpened = useAppSelector(workSelectors.getIsDialogOpened);
 	const dispatch = useAppDispatch();
@@ -40,14 +46,14 @@ export const AddWork = () => {
 
 	return (
 		<>
-			<div className="sm:hidden">
+			<div className={cn("sm:hidden", mobileClassName)}>
 				<Drawer
 					open={isOpened}
 					onOpenChange={(open) => dispatch(workActions.setIsOpened(open))}
 					onClose={onClose}
 				>
 					<DrawerTrigger asChild>
-						<div className="w-[276px]  rounded-2xl bg-white overflow-hidden relative  cursor-pointer min-h-[306px] flex items-center justify-center flex-col gap-y-4 border-[2px] border-dashed border-border h-full">
+						<div className="w-full sm:w-[276px] rounded-2xl bg-white overflow-hidden relative  cursor-pointer min-h-[306px] flex items-center justify-center flex-col gap-y-4 border-[2px] border-dashed border-border h-full">
 							<Button
 								className="w-[44px] h-[44px] rounded-full bg-secondary text-primary"
 								variant="ghost"
@@ -78,7 +84,7 @@ export const AddWork = () => {
 					</DrawerContent>
 				</Drawer>
 			</div>
-			<div className="hidden sm:block h-full">
+			<div className={cn("hidden sm:block h-full", desktopClassName)}>
 				<Dialog
 					open={isDialogOpened}
 					onOpenChange={(open) => dispatch(workActions.setIsDialogOpened(open))}
@@ -98,11 +104,7 @@ export const AddWork = () => {
 							</p>
 						</div>
 					</DialogTrigger>
-					<DialogContent
-						aria-describedby="about-me"
-						hideCloseButton={true}
-						className="bg-white"
-					>
+					<DialogContent hideCloseButton={true} className="bg-white">
 						<DialogHeader>
 							<DialogTitle className="font-semibold text-[25px] leading-[130%] mb-4 text-center">
 								Добавить работы в портфолио{" "}

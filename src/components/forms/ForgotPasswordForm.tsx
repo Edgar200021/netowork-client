@@ -61,9 +61,9 @@ export const ForgotPasswordForm = ({ className }: Props) => {
 							Email
 						</span>
 						<Input {...register("email")} type="email" required />
-						{(apiValidationErrors?.email || errors.email?.message) && (
+						{(apiValidationErrors.email || errors.email?.message) && (
 							<FieldErrors
-								error={apiValidationErrors?.email || errors.email!.message!}
+								error={apiValidationErrors.email || errors.email!.message!}
 							/>
 						)}
 					</label>

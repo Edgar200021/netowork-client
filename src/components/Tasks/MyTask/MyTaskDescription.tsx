@@ -62,10 +62,10 @@ export const MyTaskDescription = ({ description, taskId }: Props) => {
 									rows={10}
 								/>
 
-								{(apiValidationErrors?.description || errors.description) && (
+								{(apiValidationErrors.description || errors.description) && (
 									<FieldErrors
 										error={
-											apiValidationErrors?.description || errors.description!
+											apiValidationErrors.description || errors.description!
 										}
 									/>
 								)}

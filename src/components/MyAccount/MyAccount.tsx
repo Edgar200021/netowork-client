@@ -13,11 +13,19 @@ interface Props
 		"avatar" | "firstName" | "lastName" | "createdAt" | "role"
 	> {
 	className?: string;
-	freelancerTitle?: string
+	freelancerTitle?: string;
 }
 
 export const MyAccount = memo(
-	({ className, avatar, firstName, lastName, createdAt, role , freelancerTitle}: Props) => {
+	({
+		className,
+		avatar,
+		firstName,
+		lastName,
+		createdAt,
+		role,
+		freelancerTitle,
+	}: Props) => {
 		return (
 			<div
 				className={cn(
@@ -53,7 +61,7 @@ export const MyAccount = memo(
 				<div className="sm:flex sm:items-center sm:gap-x-5 sm:justify-between ">
 					<span className="hidden sm:inline-block text-lg sm:leading-[130%]">
 						{role === UserRole.Freelancer
-							? (freelancerTitle || "Найди задание для выполнения заказа")
+							? freelancerTitle || "Найди задание для выполнения заказа"
 							: "Создать задание для выполнения заказа"}
 					</span>
 					<Button className="w-full sm:w-[164px]" asChild>

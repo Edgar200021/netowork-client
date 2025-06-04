@@ -67,9 +67,9 @@ export const SetNewEmail = memo(({ className }: Props) => {
 		>
 			<div className="flex flex-col gap-y-1">
 				<Input type="email" {...register("newEmail")} placeholder="Email" />
-				{(errors.newEmail?.message || apiValidationErrors?.newEmail) && (
+				{(errors.newEmail?.message || apiValidationErrors.newEmail) && (
 					<FieldErrors
-						error={errors.newEmail?.message || apiValidationErrors?.newEmail!}
+						error={errors.newEmail?.message || apiValidationErrors.newEmail!}
 					/>
 				)}
 			</div>

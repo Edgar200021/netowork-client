@@ -81,11 +81,11 @@ export const ChangePasswordForm = ({ className }: Props) => {
 								calculateStrength={false}
 								label="Старый пароль"
 							>
-								{(apiValidationErrors?.oldPassword ||
+								{(apiValidationErrors.oldPassword ||
 									errors.oldPassword?.message) && (
 									<FieldErrors
 										error={
-											apiValidationErrors?.oldPassword ||
+											apiValidationErrors.oldPassword ||
 											errors.oldPassword!.message!
 										}
 									/>
@@ -98,11 +98,11 @@ export const ChangePasswordForm = ({ className }: Props) => {
 						name="newPassword"
 						render={({ field }) => (
 							<PasswordInput inputProps={field} label="Новый пароль">
-								{(apiValidationErrors?.newPassword ||
+								{(apiValidationErrors.newPassword ||
 									errors.newPassword?.message) && (
 									<FieldErrors
 										error={
-											apiValidationErrors?.newPassword ||
+											apiValidationErrors.newPassword ||
 											errors.newPassword!.message!
 										}
 									/>

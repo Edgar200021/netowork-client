@@ -34,22 +34,26 @@ export const MyAccountLayout = ({ className }: Props) => {
 				}
 			/>
 			{outlet && (
-				<div className="flex items-center gap-x-6 max-sm:box">
-					<NavLink
-						className="text-lg leading-[133%] pb-3 aria-[current=page]:border-b-2 aria-[current=page]:border-b-primary"
-						end={true}
-						to={ROUTES.profile}
-					>
-						Обо мне
-					</NavLink>
-					<NavLink
-						className="text-lg leading-[133%] pb-3 aria-[current=page]:border-b-2 aria-[current=page]:border-b-primary"
-						to={ROUTES.profileSettings}
-					>
-						Настройки
-					</NavLink>
-				</div>
+				<>
+					<div className="flex items-center gap-x-6 max-sm:box">
+						<NavLink
+							className="text-lg leading-[133%] pb-3 aria-[current=page]:border-b-2 aria-[current=page]:border-b-primary"
+							end={true}
+							to={ROUTES.profile}
+						>
+							Обо мне
+						</NavLink>
+						<NavLink
+							className="text-lg leading-[133%] pb-3 aria-[current=page]:border-b-2 aria-[current=page]:border-b-primary"
+							to={ROUTES.profileSettings}
+						>
+							Настройки
+						</NavLink>
+					</div>
+					{outlet}
+				</>
 			)}
+
 			{
 				//TODO
 			}

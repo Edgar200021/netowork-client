@@ -10,7 +10,7 @@ export const useMediaQuery = (query: string, cb?: () => void) => {
 				mediaQuery.current.removeEventListener("change", callback);
 			};
 		},
-	
+
 		() => {
 			if (cb && mediaQuery.current.matches) {
 				cb?.();

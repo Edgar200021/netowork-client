@@ -31,6 +31,8 @@ export const TASK_FILES_MAX_COUNT = 3;
 export const GET_TASKS_DEFAULT_LIMIT = 50;
 export const GET_TASKS_DEFAULT_PAGE = 1;
 
+export const MIN_TASK_REPLY_DESCRIPTION_LENGTH = 150;
+export const MAX_TASK_REPLY_DESCRIPTION_LENGTH = 1000;
+export const MY_TASK_REPLIES_MAX_LIMIT = 50;
 
-
-export const SORT_ORDER_SEPARATOR = "-"
+export const SORT_ORDER_SEPARATOR = "-";

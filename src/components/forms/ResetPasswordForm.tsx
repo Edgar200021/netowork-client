@@ -68,11 +68,10 @@ export const ResetPasswordForm = ({ className, token }: Props) => {
 						name="password"
 						render={({ field }) => (
 							<PasswordInput inputProps={field}>
-								{(apiValidationErrors?.password ||
-									errors.password?.message) && (
+								{(apiValidationErrors.password || errors.password?.message) && (
 									<FieldErrors
 										error={
-											apiValidationErrors?.password || errors.password!.message!
+											apiValidationErrors.password || errors.password!.message!
 										}
 									/>
 								)}

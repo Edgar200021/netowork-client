@@ -35,7 +35,7 @@ export const UpdateAccountAvatar = ({ className }: Props) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [updateAvatar, { isLoading, data, error }] = useUpdateProfileMutation();
 
-	const { apiValidationErrors } = useHandleError<"avatar">(error);
+	const { apiValidationErrors } = useHandleError<["avatar"]>(error);
 	useHandleApiResponse(data, {
 		showToast: false,
 		callback: () => {
@@ -157,7 +157,7 @@ export const UpdateAccountAvatar = ({ className }: Props) => {
 						)}
 
 						{file && (
-							<div className="flex flex-col gap-y-5 px-2 max-w-[340px] px-2 mx-auto ">
+							<div className="flex flex-col gap-y-5 px-2 max-w-[340px] mx-auto ">
 								<div className="w-full h-[340px] relative after:content-[''] after:block after:absolute after:w-[250px] after:h-[250px] after:top-5 after:left-[50%] after:translate-x-[-50%] after:bg-white/50 after:rounded-full">
 									<img
 										src={file.imgUrl}
@@ -165,7 +165,7 @@ export const UpdateAccountAvatar = ({ className }: Props) => {
 										className="w-full h-full object-cover"
 									/>
 								</div>
-								{apiValidationErrors?.avatar && (
+								{apiValidationErrors.avatar && (
 									<FieldErrors error={apiValidationErrors.avatar} />
 								)}
 							</div>
@@ -219,7 +219,7 @@ export const UpdateAccountAvatar = ({ className }: Props) => {
 									: "Фотография на вашей странице"}{" "}
 							</DialogTitle>
 
-							<DialogDescription className="text-start text-base leading-[140%] text-primary-foreground text-center">
+							<DialogDescription className="text-base leading-[140%] text-primary-foreground text-center">
 								{!file
 									? "Загрузите свою настоящую фотографию. Вы можете выбрать изображение в формате JPG, WEBP или PNG."
 									: "Выбранная область будет показываться на вашей странице."}{" "}
@@ -270,7 +270,7 @@ export const UpdateAccountAvatar = ({ className }: Props) => {
 						)}
 
 						{file && (
-							<div className="flex flex-col gap-y-5 px-2 max-w-[340px] px-2 mx-auto ">
+							<div className="flex flex-col gap-y-5 px-2 max-w-[340px] mx-auto ">
 								<div className="w-full h-[340px] relative after:content-[''] after:block after:absolute after:w-[250px] after:h-[250px] after:top-5 after:left-[50%] after:translate-x-[-50%] after:bg-white/50 after:rounded-full">
 									<img
 										src={file.imgUrl}
@@ -278,7 +278,7 @@ export const UpdateAccountAvatar = ({ className }: Props) => {
 										className="w-full h-full object-cover"
 									/>
 								</div>
-								{apiValidationErrors?.avatar && (
+								{apiValidationErrors.avatar && (
 									<FieldErrors error={apiValidationErrors.avatar} />
 								)}
 							</div>

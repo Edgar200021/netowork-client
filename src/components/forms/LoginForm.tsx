@@ -62,9 +62,9 @@ export const LoginForm = ({ className }: Props) => {
 							Email
 						</span>
 						<Input {...register("email")} type="email" required />
-						{(apiValidationErrors?.email || errors.email?.message) && (
+						{(apiValidationErrors.email || errors.email?.message) && (
 							<FieldErrors
-								error={apiValidationErrors?.email || errors.email!.message!}
+								error={apiValidationErrors.email || errors.email!.message!}
 							/>
 						)}
 					</label>
@@ -73,11 +73,10 @@ export const LoginForm = ({ className }: Props) => {
 						name="password"
 						render={({ field }) => (
 							<PasswordInput inputProps={field}>
-								{(apiValidationErrors?.password ||
-									errors.password?.message) && (
+								{(apiValidationErrors.password || errors.password?.message) && (
 									<FieldErrors
 										error={
-											apiValidationErrors?.password || errors.password!.message!
+											apiValidationErrors.password || errors.password!.message!
 										}
 									/>
 								)}

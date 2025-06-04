@@ -3,14 +3,14 @@ import {
 	GET_TASKS_DEFAULT_PAGE,
 	SORT_ORDER_SEPARATOR,
 } from "@/constants/const";
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import type { Task, TasksSort } from "../../types/task";
 import type { GetAllTasksRequest, GetMyTasksRequest } from "./types";
 
 type State = {
 	getMyTasksFilters: GetMyTasksRequest;
 	getAllTasksFilters: GetAllTasksRequest;
-	specificTask?: Task
+	specificTask?: Task;
 };
 const initialState: State = {
 	getMyTasksFilters: {
@@ -21,7 +21,7 @@ const initialState: State = {
 		limit: GET_TASKS_DEFAULT_LIMIT,
 		page: GET_TASKS_DEFAULT_PAGE,
 	},
-	specificTask: undefined
+	specificTask: undefined,
 };
 
 export const taskSlice = createSlice({
@@ -47,16 +47,20 @@ export const taskSlice = createSlice({
 		setAllTasksFiltersPage: (state, action: PayloadAction<number>) => {
 			state.getAllTasksFilters.page = action.payload;
 		},
-		setAllTasksFiltersSubCategoryIds: (state, action: PayloadAction<number>) => {
+		setAllTasksFiltersSubCategoryIds: (
+			state,
+			action: PayloadAction<number>,
+		) => {
 			if (!state.getAllTasksFilters.subCategoryIds) {
 				state.getAllTasksFilters.subCategoryIds = [action.payload];
-				return 
+				return;
 			}
 
 			if (state.getAllTasksFilters.subCategoryIds.includes(action.payload)) {
-				state.getAllTasksFilters.subCategoryIds = state.getAllTasksFilters.subCategoryIds.filter(
-					(val) => val !== action.payload,
-				);
+				state.getAllTasksFilters.subCategoryIds =
+					state.getAllTasksFilters.subCategoryIds.filter(
+						(val) => val !== action.payload,
+					);
 
 				return;
 			}
@@ -90,8 +94,8 @@ export const taskSlice = createSlice({
 		},
 
 		setSpecificTask: (state, action: PayloadAction<Task>) => {
-			state.specificTask = action.payload
-		}
+			state.specificTask = action.payload;
+		},
 	},
 	selectors: {
 		getMyTasksFilters: (state) => state.getMyTasksFilters,
@@ -107,7 +111,7 @@ export const taskSlice = createSlice({
 		getAllTasksFiltersPage: (state) => state.getAllTasksFilters.page,
 		getAllTasksFiltersLimit: (state) => state.getAllTasksFilters.limit,
 
-		getSpecificTask: (state) => state.specificTask
+		getSpecificTask: (state) => state.specificTask,
 	},
 });
 

@@ -57,9 +57,9 @@ export const MyTaskPrice = ({ price, taskId }: Props) => {
 								value={value}
 								onChange={(e) => setValue(Number(e.target.value))}
 							/>
-							{(errors.price || apiValidationErrors?.price) && (
+							{(errors.price || apiValidationErrors.price) && (
 								<FieldErrors
-									error={apiValidationErrors?.price || errors.price!}
+									error={apiValidationErrors.price || errors.price!}
 								/>
 							)}
 						</label>

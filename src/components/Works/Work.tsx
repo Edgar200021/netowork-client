@@ -18,7 +18,7 @@ export const Work = ({ className, id, title, images }: Props) => {
 	return (
 		<div
 			className={cn(
-				"w-full sm:max-w-[276px] sm:min-w-[250px] rounded-2xl bg-white flex flex-col overflow-hidden relative",
+				"rounded-2xl bg-white flex flex-col overflow-hidden relative",
 				className,
 			)}
 		>

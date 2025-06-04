@@ -14,7 +14,7 @@ export const useUpdateMyTask = <K extends (keyof UpdateTaskSchema)[]>(
 	onSubmit: () => Promise<void>;
 	isError: boolean;
 	errors: Partial<Record<K[number], string>>;
-	apiValidationErrors?: Partial<Record<K[number], string>>;
+	apiValidationErrors: Partial<Record<K[number], string>>;
 	isLoading: boolean;
 } => {
 	const [errors, setErrors] = useState<Partial<Record<K[number], string>>>({});
@@ -22,6 +22,7 @@ export const useUpdateMyTask = <K extends (keyof UpdateTaskSchema)[]>(
 	const { apiValidationErrors } = useHandleError<K>(error);
 
 	const onSubmit = async () => {
+		console.log("AXXX");
 		if (disableCondition) return;
 
 		const parsed = await updateTaskSchema.safeParseAsync(data);

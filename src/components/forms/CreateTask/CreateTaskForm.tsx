@@ -78,7 +78,6 @@ export const CreateTaskForm = ({ className }: Props) => {
 			apiValidationErrors.subCategoryId
 		) {
 			return setStep(1);
-			
 		}
 
 		if (apiValidationErrors.description) {
@@ -157,10 +156,10 @@ export const CreateTaskForm = ({ className }: Props) => {
 										className="py-5"
 										required
 									/>
-									{(errors.title?.message || apiValidationErrors?.title) && (
+									{(errors.title?.message || apiValidationErrors.title) && (
 										<FieldErrors
 											error={
-												errors.title?.message || apiValidationErrors!.title!
+												errors.title?.message || apiValidationErrors.title!
 											}
 										/>
 									)}
@@ -206,11 +205,11 @@ export const CreateTaskForm = ({ className }: Props) => {
 										/>
 
 										{(errors.categoryId?.message ||
-											apiValidationErrors?.categoryId) && (
+											apiValidationErrors.categoryId) && (
 											<FieldErrors
 												error={
 													errors.categoryId?.message ||
-													apiValidationErrors!.categoryId!
+													apiValidationErrors.categoryId!
 												}
 											/>
 										)}
@@ -273,11 +272,11 @@ export const CreateTaskForm = ({ className }: Props) => {
 										rows={3}
 									/>
 									{(errors.description?.message ||
-										apiValidationErrors?.description) && (
+										apiValidationErrors.description) && (
 										<FieldErrors
 											error={
 												errors.description?.message ||
-												apiValidationErrors!.description!
+												apiValidationErrors.description!
 											}
 										/>
 									)}

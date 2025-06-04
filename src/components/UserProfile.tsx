@@ -43,17 +43,22 @@ export const UserProfile = ({ className, user }: Props) => {
 						</Link>
 					</Button>
 
-						<Button
-							onClick={closePopover}
-							asChild
-							variant="ghost"
-							className="hover:no-underline rounded-xl py-2 px-3 w-full justify-start"
+					<Button
+						onClick={closePopover}
+						asChild
+						variant="ghost"
+						className="hover:no-underline rounded-xl py-2 px-3 w-full justify-start"
+					>
+						<Link
+							className="no-underline"
+							to={
+								user.role === UserRole.Client ? ROUTES.myTasks : ROUTES.myOrders
+							}
 						>
-							<Link className="no-underline" to={user.role === UserRole.Client ? ROUTES.myTasks : ROUTES.myOrders}>
-								Мои заказы
-							</Link>
-						</Button>
-					
+							Мои заказы
+						</Link>
+					</Button>
+
 					<Logout />
 				</PopoverContent>
 			</Popover>

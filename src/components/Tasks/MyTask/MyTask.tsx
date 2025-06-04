@@ -9,6 +9,7 @@ import { MyTaskDescription } from "./MyTaskDescription";
 import { MyTaskFiles } from "./MyTaskFiles";
 import { MyTaskPrice } from "./MyTaskPrice";
 import { MyTaskReplyNotify } from "./MyTaskReplyNotify";
+import { MyTaskReplies } from "./MyTaskReplies";
 
 interface Props extends Task {
 	className?: string;
@@ -27,20 +28,28 @@ export const MyTask = ({
 	files,
 	userEmail,
 	status,
+	views,
+	notifyAboutReplies,
 }: Props) => {
 	return (
 		<div className={cn("md:p-8 flex flex-col gap-y-8", className)}>
-			<TaskHeader title={title} price={price} createdAt={createdAt} />
+			<TaskHeader
+				title={title}
+				price={price}
+				createdAt={createdAt}
+				id={id}
+				views={views}
+			/>
 			<Tabs defaultValue="taskDetails">
 				<TabsList className="mb-8 text-base border-[1px] border-border p-0">
 					<TabsTrigger
-						className="data-[state=active]:border-[1px] data-[state=active]:border-primary rounded-r-none text-primary-foreground !shadow-none h-full "
+						className="data-[state=active]:border-[1px] data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-white  rounded-r-none text-primary-foreground !shadow-none h-full "
 						value="taskDetails"
 					>
 						Детали задания
 					</TabsTrigger>
 					<TabsTrigger
-						className="data-[state=active]:border-[1px] data-[state=active]:border-primary rounded-l-none text-primary-foreground !shadow-none h-full"
+						className="data-[state=active]:border-[1px] data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-white rounded-l-none text-primary-foreground !shadow-none h-full"
 						value="responses"
 					>
 						Отклики
@@ -63,23 +72,15 @@ export const MyTask = ({
 						<MyTaskPrice taskId={id} price={price} />
 						<MyTaskFiles taskId={id} files={files} />
 					</dl>
-					{status === TaskStatus.Open && <MyTaskDelete taskId={id} />}
+					{status === TaskStatus.Open && <MyTaskDelete taskId={id}/>}
 				</TabsContent>
-				<TabsContent value="responses">
-					<div className="max-w-[578px] mb-4">
-						<p className="font-semibold text-xl mb-4">
-							У задания пока нет откликов
-						</p>
-						<p className="text-bas text-secondary-foreground ">
-							Скоро здесь появятся отклики исполнителей, готовых выполнить ваше
-							задание. Это может занять время. Дождитесь, пока исполнители
-							увидят задание и откликнутся на него
-						</p>
-					</div>
+				<TabsContent value="responses" className="flex flex-col gap-y-10">
+					<MyTaskReplies className="mb-4" taskId={id} listClassName="order-2" />
 					<MyTaskReplyNotify
 						status={status}
 						userEmail={userEmail}
 						taskId={id}
+						notifyAboutReplies={notifyAboutReplies}
 					/>
 				</TabsContent>
 			</Tabs>

@@ -86,7 +86,7 @@ const SubmitAddWork = memo(() => {
 				}
 				className="w-1/2"
 			>
-				Продолжить
+				{isLoading ? "Загрузка..." : "Продолжить"}
 			</Button>
 		</div>
 	);

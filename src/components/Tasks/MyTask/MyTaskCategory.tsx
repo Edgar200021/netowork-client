@@ -127,7 +127,7 @@ export const MyTaskCategory = ({
 									</Select>
 								</label>
 
-								{(apiValidationErrors?.categoryId || errors.categoryId) && (
+								{(apiValidationErrors.categoryId || errors.categoryId) && (
 									<FieldErrors
 										error={
 											apiValidationErrors?.categoryId || errors.categoryId!
@@ -174,12 +174,11 @@ export const MyTaskCategory = ({
 										</SelectContent>
 									</Select>
 								</label>
-								{(apiValidationErrors?.subCategoryId ||
+								{(apiValidationErrors.subCategoryId ||
 									errors.subCategoryId) && (
 									<FieldErrors
 										error={
-											apiValidationErrors?.subCategoryId ||
-											errors.subCategoryId!
+											apiValidationErrors.subCategoryId || errors.subCategoryId!
 										}
 									/>
 								)}

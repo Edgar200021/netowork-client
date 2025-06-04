@@ -3,6 +3,10 @@ import { baseApi } from "../baseApi";
 import type { RootState } from "../store";
 import { taskSelectors } from "./taskSlice";
 import type {
+	GetMyTaskRepliesRequest,
+	GetMyTaskRepliesResponse,
+	CreateTaskReplyRequest,
+	CreateTaskReplyResponse,
 	CreateTaskRequest,
 	CreateTaskResponse,
 	DeleteTaskFilesRequest,
@@ -15,6 +19,8 @@ import type {
 	GetMyTasksResponse,
 	GetTaskRequest,
 	GetTaskResponse,
+	IncrementTaskViewRequest,
+	IncrementTaskViewResponse,
 	UpdateTaskRequest,
 	UpdateTaskResponse,
 } from "./types";
@@ -191,6 +197,40 @@ export const tasksApi = baseApi.injectEndpoints({
 				);
 			},
 		}),
+
+		incrementTaskView: builder.mutation<
+			IncrementTaskViewResponse,
+			IncrementTaskViewRequest
+		>({
+			query: (body) => ({
+				url: `/tasks/${body.taskId}/increment-view`,
+				method: "POST",
+			}),
+		}),
+
+		createTaskReply: builder.mutation<
+			CreateTaskReplyResponse,
+			CreateTaskReplyRequest
+		>({
+			query: (body) => ({
+				url: `/tasks/${body.taskId}/replies`,
+				method: "POST",
+				body,
+			}),
+		}),
+
+		getMyTaskReplies: builder.query<
+			GetMyTaskRepliesResponse,
+			GetMyTaskRepliesRequest
+		>({
+			query: (body) => ({
+				url: `/tasks/${body.taskId}/replies`,
+				params: {
+					limit: body.limit,
+					page: body.page,
+				},
+			}),
+		}),
 	}),
 });
 
@@ -202,4 +242,7 @@ export const {
 	useUpdateTaskMutation,
 	useDeleteTaskMutation,
 	useDeleteTaskFilesMutation,
+	useIncrementTaskViewMutation,
+	useCreateTaskReplyMutation,
+	useGetMyTaskRepliesQuery,
 } = tasksApi;

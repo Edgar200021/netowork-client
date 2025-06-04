@@ -55,6 +55,7 @@ export const authApi = baseApi.injectEndpoints({
 				const { data } = await queryFulfilled;
 
 				dispatch(authSlice.actions.setUser(data.data));
+				dispatch(authSlice.actions.setIsAuthorized(true));
 			},
 		}),
 		sendVerificationEmail: builder.mutation<

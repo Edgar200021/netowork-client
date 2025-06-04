@@ -27,7 +27,9 @@ export const TasksList = ({ className, loaderClassName }: Props) => {
 				([key]) => key !== "limit" || key !== "page",
 			).length > 0 &&
 				data.data.tasks.length === 0 && (
-					<p className="text-3xl font-bold text-center">Задания по заданным фильтрам не найдены</p>
+					<p className="text-3xl font-bold text-center">
+						Задания по заданным фильтрам не найдены
+					</p>
 				)}
 
 			<ul

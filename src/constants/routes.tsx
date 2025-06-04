@@ -1,3 +1,5 @@
+import type { Task } from "@/types/task";
+
 export const SPECIFIC_TASK_PARAM = "taskId";
 
 export const ROUTES = {
@@ -7,12 +9,13 @@ export const ROUTES = {
 	forgotPassword: "/auth/forgot-password",
 	resetPassword: "/auth/reset-password",
 	confirmEmailAddress: "/auth/confirm-email-address",
-	verifyAccount: "/auth/verify",
+	verifyAccount: "/auth/account-verification",
 	profile: "/profile",
 	profileSettings: "/profile/settings",
 	createTask: "/client/create-task",
 	myTasks: "/client/my-tasks",
 	myOrders: "/freelancer/my-orders",
 	tasks: "/tasks",
-	specificTask: (taskId?: number) => taskId ? `/tasks/${taskId}` : `/tasks/:${SPECIFIC_TASK_PARAM}`,
+	specificTask: (taskId?: Task["id"]) =>
+		taskId ? `/tasks/${taskId}` : `/tasks/:${SPECIFIC_TASK_PARAM}`,
 } as const;

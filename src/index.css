@@ -10,6 +10,10 @@
 		height: 6px;
 	}
 
+	.auto-cols-300-1fr {
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	}
+
 	.scrollbar::-webkit-scrollbar-thumb {
 		background: #a0a0a0;
 		border-radius: 10px;

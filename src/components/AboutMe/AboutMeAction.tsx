@@ -96,7 +96,7 @@ export const AboutMeAction = ({ className, aboutText }: Props) => {
 								onChange={(e) => setAboutMe(e.target.value)}
 								className="rounded-xs w-full px-4 py-3 border-[1px] border-b-0 border-border resize-none h-80 outline-none"
 							/>
-							{apiValidationErrors?.aboutMe && (
+							{apiValidationErrors.aboutMe && (
 								<FieldErrors error={apiValidationErrors.aboutMe} />
 							)}
 						</div>
@@ -144,7 +144,7 @@ export const AboutMeAction = ({ className, aboutText }: Props) => {
 										onChange={(e) => setAboutMe(e.target.value)}
 										className="rounded-xs w-full px-4 py-3 border-[1px]  border-border resize-none h-80 outline-none"
 									/>
-									{apiValidationErrors?.aboutMe && (
+									{apiValidationErrors.aboutMe && (
 										<FieldErrors error={apiValidationErrors.aboutMe} />
 									)}
 								</>

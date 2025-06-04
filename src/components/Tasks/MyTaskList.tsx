@@ -16,13 +16,18 @@ interface Props {
 
 export const MyTaskList = ({ className }: Props) => {
 	const filters = useAppSelector(taskSelectors.getMyTasksFilters);
-	const { data, isLoading, error } = useGetMyTasksQuery(filters);
+	const { data, isLoading, error, isFetching } = useGetMyTasksQuery(filters);
 
 	const me = useAppSelector(authSelectors.getUser);
 
 	useHandleError(error);
 
-	if (isLoading) return <Loader size="lg" />;
+	if (isLoading)
+		return (
+			<div className="flex items-center justify-center py-32">
+				<Loader size="lg" />
+			</div>
+		);
 	if (error || !data || !me) return null;
 
 	return (
@@ -30,7 +35,11 @@ export const MyTaskList = ({ className }: Props) => {
 			<TaskFilters selector="getMyTasksFilters" />
 			<TaskStatuses />
 
-			<ul className={"flex flex-col gap-y-[50px]"}>
+			<ul
+				className={cn("flex flex-col gap-y-[50px]", {
+					"opacity-50": isFetching,
+				})}
+			>
 				{data.data.tasks.map((task) => (
 					<li key={task.id}>
 						<MyTask {...task} userEmail={me.email} />

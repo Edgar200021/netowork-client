@@ -8,8 +8,9 @@ export const useHandleError = <T extends string[]>(
 	error?: unknown,
 	disabled = false,
 ) => {
-	const [apiValidationErrors, setApiValidationErrors] =
-		useState<ApiValidationError<T>["errors"]>();
+	const [apiValidationErrors, setApiValidationErrors] = useState<
+		ApiValidationError<T>["errors"]
+	>({});
 
 	useEffect(() => {
 		if (!error || disabled) return;
@@ -60,5 +61,13 @@ export const useHandleError = <T extends string[]>(
 		);
 	}, []);
 
-	return { apiValidationErrors, handleError };
+	const setValidationError = useCallback((key: T[number], message: string) => {
+		setApiValidationErrors((prev) => ({ ...prev, [key]: message }));
+	}, []);
+
+	const clearError = useCallback(() => {
+		setApiValidationErrors({});
+	}, []);
+
+	return { apiValidationErrors, handleError, setValidationError, clearError };
 };

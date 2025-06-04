@@ -64,10 +64,10 @@ export const PersonalDataSettingsForm = ({
 							Имя
 						</span>
 						<Input {...register("firstName")} required />
-						{(apiValidationErrors?.firstName || errors.firstName?.message) && (
+						{(apiValidationErrors.firstName || errors.firstName?.message) && (
 							<FieldErrors
 								error={
-									apiValidationErrors?.firstName || errors.firstName!.message!
+									apiValidationErrors.firstName || errors.firstName!.message!
 								}
 							/>
 						)}
@@ -77,10 +77,10 @@ export const PersonalDataSettingsForm = ({
 							Фамилия
 						</span>
 						<Input {...register("lastName")} required />
-						{(apiValidationErrors?.lastName || errors.lastName?.message) && (
+						{(apiValidationErrors.lastName || errors.lastName?.message) && (
 							<FieldErrors
 								error={
-									apiValidationErrors?.lastName || errors.lastName!.message!
+									apiValidationErrors.lastName || errors.lastName!.message!
 								}
 							/>
 						)}
@@ -90,9 +90,9 @@ export const PersonalDataSettingsForm = ({
 							Email
 						</span>
 						<Input {...register("email")} type="email" required />
-						{(apiValidationErrors?.email || errors.email?.message) && (
+						{(apiValidationErrors.email || errors.email?.message) && (
 							<FieldErrors
-								error={apiValidationErrors?.email || errors.email!.message!}
+								error={apiValidationErrors.email || errors.email!.message!}
 							/>
 						)}
 					</label>

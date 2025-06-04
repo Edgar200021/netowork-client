@@ -17,9 +17,11 @@ export const SpecificTask = ({ className, task }: Props) => {
 			)}
 		>
 			<TaskHeader
+				views={task.views}
 				title={task.title}
 				price={task.price}
 				createdAt={task.createdAt}
+				id={task.id}
 			/>
 			<dl className="text-base flex flex-col gap-y-6">
 				<div className="flex flex-col gap-y-2">
@@ -30,7 +32,7 @@ export const SpecificTask = ({ className, task }: Props) => {
 				<div className="flex flex-col gap-y-2 md:hidden">
 					<dt className="font-semibold leading-[130%]">Описание услуги</dt>
 					<dd className="leading-[140%]">
-						<p>{task.description}</p>
+						<p className="break-all">{task.description}</p>
 					</dd>
 				</div>
 

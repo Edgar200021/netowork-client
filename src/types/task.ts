@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export enum TaskStatus {
 	Completed = "completed",
 	Open = "open",
@@ -5,7 +7,7 @@ export enum TaskStatus {
 }
 
 export type Task = {
-	id: number;
+	id: string;
 	title: string;
 	description: string;
 	createdAt: string;
@@ -15,8 +17,16 @@ export type Task = {
 	creator: `${string} ${string}`;
 	files: { fileUrl: string; fileId: string; fileName: string }[];
 	status: TaskStatus;
+	views: number;
+	notifyAboutReplies?: boolean;
 };
 
+export type TaskReply = {
+	id: string;
+	description: string;
+	createdAt: string;
+	freelancer: Pick<User, "id" | "avatar" | "firstName" | "lastName">;
+};
 
-
-export type TasksSort = `${Extract<keyof Task, "createdAt" | "price">}-${"desc" | "asc"}`
+export type TasksSort =
+	`${Extract<keyof Task, "createdAt" | "price">}-${"desc" | "asc"}`;

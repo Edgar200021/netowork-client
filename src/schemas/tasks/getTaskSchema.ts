@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const getTaskSchema = z.object({
-	taskId: z.coerce.number().positive({
-		message: "ID задачи должно быть больше 0",
+	taskId: z.string({ message: "ID задачи должен быть строкой" }).uuid({
+		message: "ID задачи должен быть UUID",
 	}),
 });
 

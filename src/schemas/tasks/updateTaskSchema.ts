@@ -5,7 +5,10 @@ const partialCreateTaskSchema = createTaskSchema.partial();
 
 export const updateTaskSchema = z
 	.object({
-		taskId: z.number().positive({ message: "ID задачи должен быть больше 0" }),
+		taskId: z.string().uuid({
+			message: "ID задачи должен быть UUID",
+		}),
+		notifyAboutReplies: z.boolean().optional(),
 	})
 	.merge(partialCreateTaskSchema);
 

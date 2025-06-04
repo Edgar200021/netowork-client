@@ -21,6 +21,15 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "../ui/drawer";
+import { useCreateTaskReplyMutation } from "@/store/tasks/taskApi";
+import { useHandleError } from "@/hooks/useHandleError";
+import { Loader } from "../ui/loader";
+import { FieldErrors } from "../FieldError";
+import {
+	createTaskReplySchema,
+	CreateTaskReplySchema,
+} from "@/schemas/tasks/createTaskReplySchema";
+import { useHandleApiResponse } from "@/hooks/useHandleApiResponse";
 
 interface Props {
 	taskId: Task["id"];
@@ -28,11 +37,22 @@ interface Props {
 	className?: string;
 }
 
-export const ReplyToTask = ({ className, price }: Props) => {
+export const ReplyToTask = ({ className, price, taskId }: Props) => {
 	const [isOpened, setIsOpened] = useState(false);
 	const [isDialogOpened, setIsDialogOpened] = useState(false);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const [text, setText] = useState("");
+	const [createTaskReply, { isLoading, error, data }] =
+		useCreateTaskReplyMutation();
+	const { apiValidationErrors, setValidationError, clearError } =
+		useHandleError<(keyof CreateTaskReplySchema)[]>(error);
+	useHandleApiResponse(data, {
+		toastText: "Отклик успешно отправлен",
+		callback: () => {
+			setIsOpened(false);
+			setIsDialogOpened(false);
+		},
+	});
 
 	useMediaQuery("(min-width: 768px)", () => {
 		if (isOpened) {
@@ -54,8 +74,24 @@ export const ReplyToTask = ({ className, price }: Props) => {
 		}
 	});
 
-	const onClick = () => {
-		console.log("TEXT", textAreaRef.current?.value);
+	const onClick = async () => {
+		clearError();
+		const { error, data } = await createTaskReplySchema.safeParseAsync({
+			description: textAreaRef.current?.value,
+			taskId,
+		});
+
+		if (error) {
+			for (const err of error.errors) {
+				setValidationError(
+					err.path[0] as keyof CreateTaskReplySchema,
+					err.message,
+				);
+			}
+			return;
+		}
+
+		createTaskReply(data);
 	};
 
 	return (
@@ -63,9 +99,7 @@ export const ReplyToTask = ({ className, price }: Props) => {
 			<div className={cn("md:hidden", className)}>
 				<Drawer open={isOpened} onOpenChange={setIsOpened}>
 					<DrawerTrigger asChild className="md:hidden">
-						<Button className="w-full">
-							Откликнуться
-						</Button>
+						<Button className="w-full">Откликнуться</Button>
 					</DrawerTrigger>
 					<DrawerContent className="bg-white md:hidden">
 						<DrawerHeader className="mb-5 px-[10px]">
@@ -79,7 +113,7 @@ export const ReplyToTask = ({ className, price }: Props) => {
 							<dl className="mb-20">
 								<div className="flex flex-col gap-y-2 mb-4">
 									<dt className="leading-[140%]">Описание</dt>
-									<dd className="leading-[140%]">
+									<dd className="leading-[140%] flex flex-col gap-y-4">
 										<textarea
 											defaultValue={text}
 											placeholder="Укажите свой опыт работы, расскажите, почему именно вы должны стать исполнителем этого задания"
@@ -87,6 +121,9 @@ export const ReplyToTask = ({ className, price }: Props) => {
 											ref={textAreaRef}
 											rows={6}
 										/>
+										{apiValidationErrors.description && (
+											<FieldErrors error={apiValidationErrors.description} />
+										)}
 									</dd>
 								</div>
 								<div className="flex items-center gap-x-2 mb-6">
@@ -96,8 +133,8 @@ export const ReplyToTask = ({ className, price }: Props) => {
 								<dt className="leading-[130%]">Бюджет заказчика</dt>
 								<dd className="leading-[140%] text-[22px]">до {price} руб.</dd>
 							</dl>
-							<Button onClick={onClick}>
-								{/*{isLoading && <Loader size="sm" variant="secondary" />}*/}
+							<Button disabled={isLoading} onClick={onClick}>
+								{isLoading && <Loader size="sm" variant="secondary" />}
 								Откликнуться
 							</Button>
 						</DrawerFooter>
@@ -120,7 +157,7 @@ export const ReplyToTask = ({ className, price }: Props) => {
 							<dl className="mb-8">
 								<div className="flex flex-col gap-y-2 mb-4">
 									<dt className="leading-[140%]">Описание</dt>
-									<dd className="leading-[140%]">
+									<dd className="leading-[140%] flex flex-col gap-y-4">
 										<textarea
 											defaultValue={text}
 											placeholder="Укажите свой опыт работы, расскажите, почему именно вы должны стать исполнителем этого задания"
@@ -128,6 +165,9 @@ export const ReplyToTask = ({ className, price }: Props) => {
 											ref={textAreaRef}
 											rows={6}
 										/>
+										{apiValidationErrors?.description && (
+											<FieldErrors error={apiValidationErrors.description} />
+										)}
 									</dd>
 								</div>
 								<div className="flex items-center gap-x-2 mb-6">
@@ -137,8 +177,8 @@ export const ReplyToTask = ({ className, price }: Props) => {
 								<dt className="leading-[130%]">Бюджет заказчика</dt>
 								<dd className="leading-[140%] text-[22px]">до {price} руб.</dd>
 							</dl>
-							<Button onClick={onClick}>
-								{/*{isLoading && <Loader size="sm" variant="secondary" />}*/}
+							<Button disabled={isLoading} onClick={onClick}>
+								{isLoading && <Loader size="sm" variant="secondary" />}
 								Откликнуться
 							</Button>
 						</DialogFooter>

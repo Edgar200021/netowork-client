@@ -8,9 +8,10 @@ import { toast } from "react-toastify";
 
 interface Props {
 	taskId: Task["id"];
+	className?: string
 }
 
-export const MyTaskDelete = ({ taskId }: Props) => {
+export const MyTaskDelete = ({ taskId, className }: Props) => {
 	const [deleteTask, { isLoading, error }] = useDeleteTaskMutation();
 	const { apiValidationErrors } = useHandleError<["taskId"]>(error);
 
@@ -31,7 +32,7 @@ export const MyTaskDelete = ({ taskId }: Props) => {
 	}, [apiValidationErrors?.taskId]);
 
 	return (
-		<Button onClick={onDelete} disabled={isLoading} variant="destructive">
+		<Button onClick={onDelete} disabled={isLoading} variant="destructive" className={className}>
 			{isLoading ? "Загрузка..." : "Отменить заказ"}
 		</Button>
 	);
