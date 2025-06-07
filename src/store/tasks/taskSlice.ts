@@ -6,10 +6,13 @@ import {
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import type { Task, TasksSort } from "../../types/task";
 import type { GetAllTasksRequest, GetMyTasksRequest } from "./types";
+import { GetTasksByMyRepliesSchema } from "../../schemas/tasks/getTasksByMyRepliesSchema";
 
 type State = {
 	getMyTasksFilters: GetMyTasksRequest;
 	getAllTasksFilters: GetAllTasksRequest;
+	getTasksByMyRepliesFilters: GetTasksByMyRepliesSchema;
+
 	specificTask?: Task;
 };
 const initialState: State = {
@@ -18,6 +21,10 @@ const initialState: State = {
 		page: GET_TASKS_DEFAULT_PAGE,
 	},
 	getAllTasksFilters: {
+		limit: GET_TASKS_DEFAULT_LIMIT,
+		page: GET_TASKS_DEFAULT_PAGE,
+	},
+	getTasksByMyRepliesFilters: {
 		limit: GET_TASKS_DEFAULT_LIMIT,
 		page: GET_TASKS_DEFAULT_PAGE,
 	},
@@ -93,6 +100,19 @@ export const taskSlice = createSlice({
 			state.getAllTasksFilters.sort.push(action.payload);
 		},
 
+		setTasksByMyRepliesFilters: (
+			state,
+			action: PayloadAction<GetTasksByMyRepliesSchema>,
+		) => {
+			state.getTasksByMyRepliesFilters = {
+				...state.getTasksByMyRepliesFilters,
+				...action.payload,
+			};
+		},
+		setTasksByMyRepliesFiltersPage: (state, action: PayloadAction<number>) => {
+			state.getTasksByMyRepliesFilters.page = action.payload;
+		},
+
 		setSpecificTask: (state, action: PayloadAction<Task>) => {
 			state.specificTask = action.payload;
 		},
@@ -110,6 +130,14 @@ export const taskSlice = createSlice({
 			state.getAllTasksFilters.subCategoryIds,
 		getAllTasksFiltersPage: (state) => state.getAllTasksFilters.page,
 		getAllTasksFiltersLimit: (state) => state.getAllTasksFilters.limit,
+
+		getTasksByMyRepliesFilters: (state) => state.getTasksByMyRepliesFilters,
+		getTasksByMyRepliesFiltersStatus: (state) =>
+			state.getTasksByMyRepliesFilters.status,
+		getTasksByMyRepliesFiltersPage: (state) =>
+			state.getTasksByMyRepliesFilters.page,
+		getTasksByMyRepliesFiltersLimit: (state) =>
+			state.getTasksByMyRepliesFilters.limit,
 
 		getSpecificTask: (state) => state.specificTask,
 	},

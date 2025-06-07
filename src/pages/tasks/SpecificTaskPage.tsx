@@ -21,7 +21,7 @@ export const SpecificTaskPage = ({ className }: Props) => {
 	return (
 		<main className={className}>
 			<div className="box">
-				<SpecificTask task={task} className="md:mt-32" />
+				<SpecificTask type="reply" task={task} className="md:mt-32" />
 				<IncrementTaskView taskId={task.id} disabled={fromRequest} />
 			</div>
 		</main>

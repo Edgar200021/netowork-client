@@ -6,6 +6,11 @@ import { taskActions, taskSelectors } from "@/store/tasks/taskSlice";
 
 interface Props {
 	className?: string;
+	mainLabel?: string;
+	selector: Extract<
+		keyof typeof taskSelectors,
+		"getMyTasksFiltersStatus" | "getTasksByMyRepliesFiltersStatus"
+	>;
 }
 
 const statusFilters: { label: string; status?: Task["status"] }[] = [
@@ -26,8 +31,8 @@ const statusFilters: { label: string; status?: Task["status"] }[] = [
 	},
 ];
 
-export const TaskStatuses = ({ className }: Props) => {
-	const status = useAppSelector(taskSelectors.getMyTasksFiltersStatus);
+export const TaskStatuses = ({ className, mainLabel, selector }: Props) => {
+	const status = useAppSelector(taskSelectors[selector]);
 	const dispatch = useAppDispatch();
 	return (
 		<div
@@ -36,20 +41,26 @@ export const TaskStatuses = ({ className }: Props) => {
 				className,
 			)}
 		>
-			{statusFilters.map(({ label, status: s }) => (
+			{statusFilters.map(({ label, status: s }, i) => (
 				<Button
 					key={label}
 					className="px-0 py-0 pb-4 relative"
 					onClick={() => {
 						dispatch(
-							taskActions.setMyTasksFilters({
+							taskActions[
+								selector === "getMyTasksFiltersStatus"
+									? "setMyTasksFilters"
+									: "setTasksByMyRepliesFilters"
+							]({
 								status: s,
 							}),
 						);
 					}}
 					variant="ghost"
 				>
-					<span className="text-lg">{label}</span>
+					<span className="text-lg">
+						{i === 0 ? mainLabel || label : label}
+					</span>
 					<span
 						className={cn(
 							"absolute bottom-0 left-0 bg-primary opacity-0 transition-opacity duration-300 ease h-[2px] block w-full",

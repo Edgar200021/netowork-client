@@ -2,13 +2,15 @@ import { cn } from "@/lib/utils";
 import type { Task } from "@/types/task";
 import { ReplyToTask } from "./ReplyToTask";
 import { TaskHeader } from "./TaskHeader";
+import { Button } from "../ui/button";
 
 interface Props {
 	className?: string;
 	task: Task;
+	type: "reply" | "message";
 }
 
-export const SpecificTask = ({ className, task }: Props) => {
+export const SpecificTask = ({ className, task, type }: Props) => {
 	return (
 		<div
 			className={cn(
@@ -44,15 +46,33 @@ export const SpecificTask = ({ className, task }: Props) => {
 						</dd>
 					</div>
 
-					<ReplyToTask
-						className="max-md:hidden"
-						taskId={task.id}
-						price={task.price}
-					/>
+					{type === "reply" && (
+						<ReplyToTask
+							className="max-md:hidden"
+							taskId={task.id}
+							price={task.price}
+						/>
+					)}
+					{type === "message" && (
+						<Button variant="outline" className="max-md:hidden text-secondary-foreground">
+							Перейти в чат
+						</Button>
+					)}
 				</div>
 			</dl>
 
-			<ReplyToTask className="md:hidden" taskId={task.id} price={task.price} />
+			{type === "reply" && (
+				<ReplyToTask
+					className="md:hidden"
+					taskId={task.id}
+					price={task.price}
+				/>
+			)}
+			{type === "message" && (
+				<Button variant="outline" className="md:hidden text-secondary-foreground">
+					Перейти в чат
+				</Button>
+			)}
 		</div>
 	);
 };

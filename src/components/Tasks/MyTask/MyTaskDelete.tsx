@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 interface Props {
 	taskId: Task["id"];
-	className?: string
+	className?: string;
 }
 
 export const MyTaskDelete = ({ taskId, className }: Props) => {
@@ -32,7 +32,12 @@ export const MyTaskDelete = ({ taskId, className }: Props) => {
 	}, [apiValidationErrors?.taskId]);
 
 	return (
-		<Button onClick={onDelete} disabled={isLoading} variant="destructive" className={className}>
+		<Button
+			onClick={onDelete}
+			disabled={isLoading}
+			variant="destructive"
+			className={className}
+		>
 			{isLoading ? "Загрузка..." : "Отменить заказ"}
 		</Button>
 	);

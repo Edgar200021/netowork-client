@@ -23,6 +23,8 @@ import type {
 	IncrementTaskViewResponse,
 	UpdateTaskRequest,
 	UpdateTaskResponse,
+	GetTasksByMyRepliesResponse,
+	GetTasksByMyRepliesRequest,
 } from "./types";
 
 export const tasksApi = baseApi.injectEndpoints({
@@ -231,6 +233,16 @@ export const tasksApi = baseApi.injectEndpoints({
 				},
 			}),
 		}),
+
+		getTasksByMyReplies: builder.query<
+			GetTasksByMyRepliesResponse,
+			GetTasksByMyRepliesRequest
+		>({
+			query: (body) => ({
+				url: `/tasks/by-my-replies`,
+				params: body,
+			}),
+		}),
 	}),
 });
 
@@ -245,4 +257,5 @@ export const {
 	useIncrementTaskViewMutation,
 	useCreateTaskReplyMutation,
 	useGetMyTaskRepliesQuery,
+	useLazyGetTasksByMyRepliesQuery,
 } = tasksApi;

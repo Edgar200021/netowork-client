@@ -52,7 +52,9 @@ export const MyTaskReplyNotify = ({
 					{userEmail}
 				</p>
 			</div>
-			{status === TaskStatus.Open && <MyTaskDelete taskId={taskId} className='w-fit' />}
+			{status === TaskStatus.Open && (
+				<MyTaskDelete taskId={taskId} className="w-fit" />
+			)}
 		</div>
 	);
 };

@@ -5,11 +5,13 @@ import {
 import { useQueryParams } from "@/hooks/useQueryParams";
 import { getAllTasksSchema } from "@/schemas/tasks/getAllTasksSchema";
 import { getMyTasksSchema } from "@/schemas/tasks/getMyTasksSchema";
+import { getTasksByMyRepliesSchema } from "@/schemas/tasks/getTasksByMyRepliesSchema";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { taskSlice } from "@/store/tasks/taskSlice";
+import { taskActions, taskSelectors, taskSlice } from "@/store/tasks/taskSlice";
 import type {
 	GetAllTasksRequest,
 	GetMyTasksRequest,
+	GetTasksByMyRepliesRequest,
 } from "@/store/tasks/types";
 import { isTaskStatus } from "@/types/guards";
 import type { TasksSort } from "@/types/task";
@@ -18,8 +20,8 @@ import { toast } from "react-toastify";
 
 export const TaskFilters = <
 	T extends Extract<
-		keyof typeof taskSlice.selectors,
-		"getMyTasksFilters" | "getAllTasksFilters"
+		keyof typeof taskSelectors,
+		"getMyTasksFilters" | "getAllTasksFilters" | "getTasksByMyRepliesFilters"
 	>,
 >({
 	selector,
@@ -40,7 +42,9 @@ export const TaskFilters = <
 
 	const filters = useAppSelector(taskSlice.selectors[selector]);
 
-	const filtersFromQuery: GetAllTasksRequest & GetMyTasksRequest = {
+	const filtersFromQuery: GetAllTasksRequest &
+		GetMyTasksRequest &
+		GetTasksByMyRepliesRequest = {
 		limit: Number(limit) || GET_TASKS_DEFAULT_LIMIT,
 		page: Number(page) || GET_TASKS_DEFAULT_PAGE,
 		...(isTaskStatus(status) && {
@@ -59,7 +63,9 @@ export const TaskFilters = <
 		(async () => {
 			const result = await (selector === "getAllTasksFilters"
 				? getAllTasksSchema
-				: getMyTasksSchema
+				: selector === "getTasksByMyRepliesFilters"
+					? getTasksByMyRepliesSchema
+					: getMyTasksSchema
 			).safeParseAsync(filtersFromQuery);
 
 			if (!result.success) {
@@ -71,8 +77,10 @@ export const TaskFilters = <
 
 			const action =
 				selector === "getAllTasksFilters"
-					? taskSlice.actions.setAllTasksFilters
-					: taskSlice.actions.setMyTasksFilters;
+					? taskActions.setAllTasksFilters
+					: selector === "getTasksByMyRepliesFilters"
+						? taskActions.setTasksByMyRepliesFilters
+						: taskActions.setMyTasksFilters;
 			dispatch(action(result.data));
 		})();
 	}, []);
@@ -80,12 +88,18 @@ export const TaskFilters = <
 	useEffect(() => {
 		for (const [key, value] of Object.entries(filters)) {
 			if (!value || (Array.isArray(value) && value.length === 0)) {
-				deleteParams(key as keyof (GetAllTasksRequest & GetMyTasksRequest));
+				deleteParams(
+					key as keyof (GetAllTasksRequest &
+						GetMyTasksRequest &
+						GetTasksByMyRepliesRequest),
+				);
 				continue;
 			}
 
 			setParams(
-				key as keyof (GetAllTasksRequest & GetMyTasksRequest),
+				key as keyof (GetAllTasksRequest &
+					GetMyTasksRequest &
+					GetTasksByMyRepliesRequest),
 				Array.isArray(value) ? value.join(",") : String(value),
 			);
 		}

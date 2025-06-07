@@ -33,7 +33,7 @@ export const MyTaskList = ({ className }: Props) => {
 	return (
 		<div className={cn(className, "")}>
 			<TaskFilters selector="getMyTasksFilters" />
-			<TaskStatuses />
+			<TaskStatuses selector="getMyTasksFiltersStatus" />
 
 			<ul
 				className={cn("flex flex-col gap-y-[50px]", {

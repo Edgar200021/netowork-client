@@ -3,7 +3,7 @@ import { useHandleError } from "@/hooks/useHandleError";
 import { cn } from "@/lib/utils";
 import { useGetMyTaskRepliesQuery } from "@/store/tasks/taskApi";
 import { Task } from "@/types/task";
-import { TaskReply } from './TaskReply';
+import { TaskReply } from "./TaskReply";
 
 interface Props {
 	taskId: Task["id"];
@@ -34,7 +34,11 @@ export const MyTaskReplies = ({ className, taskId, listClassName }: Props) => {
 
 	return (
 		<ul className={cn("", listClassName)}>
-			{data.data.replies.map(reply => <li key={reply.id}><TaskReply taskReply={reply}/></li>)}
+			{data.data.replies.map((reply) => (
+				<li key={reply.id}>
+					<TaskReply taskReply={reply} />
+				</li>
+			))}
 		</ul>
 	);
 };

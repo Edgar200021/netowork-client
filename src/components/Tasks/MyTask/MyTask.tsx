@@ -72,7 +72,7 @@ export const MyTask = ({
 						<MyTaskPrice taskId={id} price={price} />
 						<MyTaskFiles taskId={id} files={files} />
 					</dl>
-					{status === TaskStatus.Open && <MyTaskDelete taskId={id}/>}
+					{status === TaskStatus.Open && <MyTaskDelete taskId={id} />}
 				</TabsContent>
 				<TabsContent value="responses" className="flex flex-col gap-y-10">
 					<MyTaskReplies className="mb-4" taskId={id} listClassName="order-2" />

@@ -52,7 +52,9 @@ export const UserProfile = ({ className, user }: Props) => {
 						<Link
 							className="no-underline"
 							to={
-								user.role === UserRole.Client ? ROUTES.myTasks : ROUTES.myOrders
+								user.role === UserRole.Client
+									? ROUTES.myTasks
+									: ROUTES.myReplies
 							}
 						>
 							Мои заказы

@@ -9,6 +9,7 @@ import type { GetTaskSchema } from "@/schemas/tasks/getTaskSchema";
 import type { UpdateTaskSchema } from "@/schemas/tasks/updateTaskSchema";
 import type { ApiSuccessResponse } from "@/types/api";
 import type { Task, TaskReply } from "@/types/task";
+import { GetTasksByMyRepliesSchema } from "../../schemas/tasks/getTasksByMyRepliesSchema";
 
 export type GetAllTasksRequest = GetAllTasksSchema;
 export type GetAllTasksResponse = ApiSuccessResponse<{
@@ -46,5 +47,11 @@ export type CreateTaskReplyResponse = ApiSuccessResponse<null>;
 export type GetMyTaskRepliesRequest = GetMyTaskRepliesSchema;
 export type GetMyTaskRepliesResponse = ApiSuccessResponse<{
 	replies: TaskReply[];
+	totalCount: number;
+}>;
+
+export type GetTasksByMyRepliesRequest = GetTasksByMyRepliesSchema;
+export type GetTasksByMyRepliesResponse = ApiSuccessResponse<{
+	tasks: Task[];
 	totalCount: number;
 }>;

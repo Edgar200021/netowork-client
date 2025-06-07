@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
 					},
 					{
 						element: <MyAccountLayout />,
-						path: ROUTES.myOrders,
+						path: ROUTES.myReplies,
 					},
 				],
 			},

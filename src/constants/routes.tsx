@@ -14,7 +14,7 @@ export const ROUTES = {
 	profileSettings: "/profile/settings",
 	createTask: "/client/create-task",
 	myTasks: "/client/my-tasks",
-	myOrders: "/freelancer/my-orders",
+	myReplies: "/freelancer/my-replies",
 	tasks: "/tasks",
 	specificTask: (taskId?: Task["id"]) =>
 		taskId ? `/tasks/${taskId}` : `/tasks/:${SPECIFIC_TASK_PARAM}`,
